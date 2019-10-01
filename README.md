@@ -1,6 +1,10 @@
 # Fritjof
 Hnefatafl games review software
 
+----------
+
+Fritjof is a simple review program for Copenhagen hnefatafl games. It includes basic functionalities as handling of variations tree, comments, markers / arrows or position editing.
+
 *************************************
 If you have troubles with the display (bad resolution), go to compatibility properties of the executable and modify the PPP parameters to let the application control the scaling of the window display.
 
