@@ -23,9 +23,12 @@ If the board does not display the variation correctly, it may be due to a displa
 **************************************
 The source code of this program is available at:
 
+https://github.com/Ytrezat/Fritjof
+
 
 **************************************
 WARNING: This is an amateur work, open-source and free to download and use. I decline responsibility for any consequence which could arise due to the use of this program.
 
 To give a feedback or report an issue: 456ytreza456@gmail.com
+
 Copyright T. Vieu 2019
