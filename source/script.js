@@ -555,6 +555,7 @@ function onSquareMouseDown(e) {
   if (gameMode === "edit") {
     if (e.button === 0 || e.button === 2) {
       handleEditClick(e)
+      render()
     }
     return
   }
@@ -650,7 +651,6 @@ function handleEditClick(e){
     if(board[x][y]===DEFENDER){currentNode.countPieces[1]-=1;}
     if(board[x][y]===ATTACKER){currentNode.countPieces[0]-=1;}
     board[x][y] = EMPTY
-    render()
     return
   }
 
@@ -662,14 +662,14 @@ function handleEditClick(e){
   // Left click → defender
   if(e.button === 0){
     board[x][y] = DEFENDER
+    currentNode.countPieces[1]+=1
   }
 
   // Right click → attacker
   if(e.button === 2){
     board[x][y] = ATTACKER
+    currentNode.countPieces[0]+=1
   }
-
-  render()
 }
 
 function handlePlayerTurnsButtons(){
