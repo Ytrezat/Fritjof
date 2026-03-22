@@ -662,13 +662,13 @@ function handleEditClick(e){
   // Left click → defender
   if(e.button === 0){
     board[x][y] = DEFENDER
-    currentNode.countPieces[1]+=1
+    currentNode.countPieces[1]+=1;
   }
 
   // Right click → attacker
   if(e.button === 2){
     board[x][y] = ATTACKER
-    currentNode.countPieces[0]+=1
+    currentNode.countPieces[0]+=1;
   }
 }
 
