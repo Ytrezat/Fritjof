@@ -15,16 +15,6 @@ function copyBoard(src){
   return src.map(row => [...row])
 }
 
-function findKingInBoard(b) {
-  for (let x = 0; x < b.length; x++) {
-    for (let y = 0; y < b[x].length; y++) {
-      if (b[x][y] === KING) return [x, y];
-    }
-  }
-  return null;
-}
-
-
 /* =============================================================================================================
 ======  MOVE DEFINITION  ======
 ============================================================================================================= */
@@ -692,15 +682,10 @@ function onDoubleClick(e){
   const x = +e.currentTarget.dataset.x
   const y = +e.currentTarget.dataset.y
 
-  // Remove existing king
-  for(let i=0;i<SIZE;i++){
-    for(let j=0;j<SIZE;j++){
-      if(board[i][j] === KING){
-        board[i][j] = EMPTY
-      }
-    }
-  }
+  let [kx,ky] = currentNode.king
+  board[kx][ky] = EMPTY
   board[x][y] = KING
+  currentNode.king = [x,y]
   render()
 }
 
@@ -871,8 +856,11 @@ function newGame(){
 function startGame(){
   // Use currentPlayer from edit mode as first player
   rootNode = new MoveNode(copyBoard(board), null, null, currentPlayer)
+  rootNode.countPieces[0] = currentNode.countPieces[0]
+  rootNode.countPieces[1] = currentNode.countPieces[1]
+  rootNode.king = currentNode.king
   currentNode = rootNode
-  currentNode.king = findKingInBoard(board)
+  
   rootNode = currentNode
 
   gameMode = "play"
