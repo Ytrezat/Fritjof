@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hnefatafl Analysis</title>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="source/styles.css" />
+</head>
+<body>
+
+  <div id="mainLayout">
+
+    <div id="boardToolbar">
+      <!-- Shared toolbar row (always visible) -->
+      <div id="toolbarTopRow">
+        <button onclick="setAnalysisName()">File name</button>
+        <div class="themeMenuWrapper">
+          <button class="themeButton" onclick="toggleThemeMenu(event)">Change Theme</button>
+          <div class="themeMenu hidden">
+            <button class="toggleCoordinatesOption" type="button" onclick="toggleCoordinates()">
+              Coordinates: On
+            </button>
+
+            <button class="toggleKingDesignOption" type="button" onclick="toggleKingDesign()">
+              King Design: Standard
+            </button>
+
+              <button id="boardThemeCycleButton" type="button" onclick="cycleBoardTheme(event)">
+                Board: Classic
+              </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mode-specific controls -->
+      <div id="playModeButtons">
+        <button onclick="exportAnalysis()">Export</button>
+        <button onclick="takeBoardScreenshot()">Screenshot</button>
+        <button id="GoToEditButton" onclick="startEdit()">Edit</button>
+      </div>
+
+      <div id="editModeButtons">
+        <input type="file" id="importFile" style="display:none" onchange="importAnalysis(event)">
+        <button onclick="document.getElementById('importFile').click()">Import</button>
+        <button onclick="pasteSimpleGame()">Import move list</button>
+      </div>
+    </div>
+
+    <div id="leftPanel">
+      <h2 id="boardTitle">Copenhagen Hnefatafl Analysis Board</h2>
+      <div id="analysisNameDisplay" style="font-size:16px; color:#444; margin-bottom:10px;"></div>
+
+      <div id="boardFrame">
+        <div class="coord-corner"></div>
+
+        <div class="coord-row top">
+          <span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span><span>i</span><span>j</span><span>k</span>
+        </div>
+
+        <div class="coord-corner"></div>
+
+        <div class="coord-col left">
+          <span>11</span><span>10</span><span>9</span><span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span>
+        </div>
+
+        <div id="board"></div>
+
+        <div class="coord-col right">
+          <span>11</span><span>10</span><span>9</span><span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span>
+        </div>
+
+        <div class="coord-corner"></div>
+
+        <div class="coord-row bottom">
+          <span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span><span>i</span><span>j</span><span>k</span>
+        </div>
+
+        <div class="coord-corner"></div>
+      </div>
+
+      <div id="turnBar">
+        <div id="turnIndicator"></div>
+
+      <div id="leftControls">
+        <div id="controls"></div>
+        <div id="turnSelector" class="hidden">
+          <button id="attackerButton">Black to move</button>
+          <button id="defenderButton">White to move</button>
+        </div>
+
+
+      </div>
+
+        <div id="pieceCounters">
+          <div class="pieceCounter" id="blackCounter">
+            <div class="pieceIcon" id="blackIcon"></div>
+            <span class="pieceCount" id="blackCount">0</span>
+          </div>
+
+        <div class="pieceCounter" id="whiteCounter">
+          <div class="pieceIcon" id="whiteIcon"></div>
+          <span class="pieceCount" id="whiteCount">0</span>
+        </div>
+        </div>
+      </div>
+      <h6 id="modeIndicator"></h6>
+<div id="playCommentBox" class="hidden"></div>
+    <div id="boardHint">
+      Right-click on the board to highlight, right-click and drag to draw arrows
+    </div>
+
+    </div>
+
+
+
+
+
+    <div id="rightPanel">
+      <div id="variationTree"></div>
+      <div id="variationNote">Right click to see options</div>
+      <div id="editStartWrapper" class="hidden" style="text-align:center; margin-top:20px;">
+        <button id="startGameButton" onclick="startGame()">Start</button>
+      </div>
+
+      <div id="commentBox" style="margin-top:10px; width: 300px;">
+        <textarea id="commentInput" rows="3" style="width:100%;" placeholder="Add comment to current move..."></textarea>
+        <button onclick="saveComment()">Save Comment</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="treeContextMenu" class="context-menu hidden"></div>
+
+  <!-- External JavaScript -->
+  <script src="source/globals.js"></script>
+  <script src="source/theme.js"></script>
+  <script src="source/pieces.js"></script>
+  <script src="source/rules.js"></script>
+  <script src="source/drawing.js"></script>
+  <script src="source/export.js"></script>
+  <script src="source/script.js"></script>
+</body>
+</html>
