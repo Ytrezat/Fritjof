@@ -870,8 +870,8 @@ function newGame(){
 
 function startGame(){
   // Use currentPlayer from edit mode as first player
-  currentNode.board = copyBoard(board)
-  currentNode.player = currentPlayer
+  rootNode = new MoveNode(copyBoard(board), null, null, currentPlayer)
+  currentNode = rootNode
   currentNode.king = findKingInBoard(board)
   rootNode = currentNode
 

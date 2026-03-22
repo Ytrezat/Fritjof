@@ -568,7 +568,7 @@ function getEdgeLineSquares(b, edgeName) {
 }
 
 function getInwardSquareForEdge(b, edgeName, x, y){
-  const info = getEdgeInfo(b, x, y);
+  const info = getEdgeInfo(x, y);
   if (!info || info.edge !== edgeName) return null;
 
   return [x + info.inward[0], y + info.inward[1]];
@@ -661,7 +661,7 @@ function isWhiteSupportSquare(b, x, y, R) {
   if (R.has(posKey(x, y))) return true;
 
   // Permanent virtual white support (corners + throne)
-  if (isHostileSquare(x, y)) return true;
+  if (isTheoremHostileSquare(x, y, R)) return true;
 
   return false;
 }
