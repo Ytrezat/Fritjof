@@ -221,7 +221,7 @@ function updateTurnUI(currentPlayer,winner) {
     turnEl.style.color = "gold";       // highlight in gold
     turnEl.style.fontWeight = "bold";
   } else {
-    turnEl.textContent = currentPlayer === ATTACKER ? "Black to move" : "White to move";
+    turnEl.textContent = currentPlayer === ATTACKER ? "Black to play" : "White to play";
     turnEl.style.color = "";          // reset color
     turnEl.style.fontWeight = "";
     // remove any previous highlights if no winner

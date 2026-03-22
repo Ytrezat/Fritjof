@@ -134,13 +134,12 @@ function playMove(b,x1,y1,x2,y2){
   b[x2][y2]=b[x1][y1]
   b[x1][y1]=EMPTY
 
-  const captured = applyCaptures(x2,y2)
+  const captured = applyCaptures(b,x2,y2)
   for (const [px, py] of captured) {
     b[px][py]=EMPTY;
   }
   return captured
 }
-
 
 /* =============================================================================================================
    CAPTURE SYSTEMS
@@ -148,7 +147,7 @@ function playMove(b,x1,y1,x2,y2){
 
 /* ---------- STANDARD CAPTURE ---------- */
 
-function custodialCapture(x,y){
+function custodialCapture(board,x,y){
   const removed = []
   const player=(board[x][y] === ATTACKER) ? ATTACKER : DEFENDER;
 
@@ -177,7 +176,7 @@ function custodialCapture(x,y){
 
 /* ---------- COPENHAGEN SHIELDWALL ---------- */
 
-function shieldwallCapture(x, y) {
+function shieldwallCapture(board,x, y) {
   const removed = []
   const player = (board[x][y] === ATTACKER) ? ATTACKER : DEFENDER;
   const enemy = (player === ATTACKER) ? DEFENDER : ATTACKER;
@@ -262,10 +261,10 @@ function shieldwallCapture(x, y) {
   return removed
 }
 
-function applyCaptures(x,y){
+function applyCaptures(b,x,y){
   const removed = [
-    ...custodialCapture(x,y),
-    ...shieldwallCapture(x,y)
+    ...custodialCapture(b,x,y),
+    ...shieldwallCapture(b,x,y)
   ]
   return removed
 }
@@ -605,12 +604,6 @@ function getAttackerEdgeSegments(b, edgeName) {
 /**
  * Check whether a contiguous attacker segment on an edge is closed by
  * White support at both ends ALONG THE EDGE ITSELF.
- *
- * - If there is an edge square immediately before the segment, it must be White-supported.
- * - If not (segment reaches edge endpoint), that side is considered closed because
- *   the corner already has virtual White support in the simplified model.
- *
- * Same for the square immediately after the segment.
  */
 function isEdgeSegmentClosedByWhite(b, edgeName, segment, R) {
   const edgeSquares = getEdgeLineSquares(b, edgeName);

@@ -3,7 +3,7 @@
   flex-direction: row;
   align-items: flex-start;
   gap: 30px;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-left: 10%;
   font-family: Arial;
 }
@@ -32,7 +32,7 @@
 
 #boardTitle {
   text-align: center;
-  margin: 0 0 16px 0;
+  margin: 0 0 10px 0;
 }
 
 #boardHint {
@@ -61,8 +61,8 @@
 
 #boardFrame {
   display: grid;
-  grid-template-columns: 28px auto 28px;
-  grid-template-rows: 28px auto 28px;
+  grid-template-columns: 24px auto 24px;
+  grid-template-rows: 24px auto 24px;
   gap: 0;
   align-items: center;
   justify-items: center;
@@ -175,6 +175,8 @@
   color: white;
   border-radius: 6px;
   cursor: pointer;
+  font-family: Arial;
+  font-size:15px;
 }
 
 #turnSelector button:hover {
@@ -211,6 +213,11 @@
   gap: 6px;
 }
 
+#modeIndicator:empty {
+  display: none;
+}
+
+
 #boardToolbar button {
   padding: 6px 10px;
   font-size: 14px;
@@ -243,12 +250,12 @@
 }
 
 #playCommentBox {
-  margin-top: 0px;
-  margin-bottom: 10px;
+  margin-top: 4px;
+  margin-bottom: 4px;
   padding: 8px;
-  width: 100%;
-  min-height: 60px;
-  max-height: 120px;
+  width: 700px;
+  min-height: 50px;
+  max-height: 100px;
   overflow-y: auto;
   background: #f4f8ff;
   border: 1px solid #ccc;
@@ -469,7 +476,12 @@ button:hover {
 
 .themeMenuWrapper {
   position: relative;
-  display: block; /* behaves like your stacked toolbar buttons */
+  display: flex;
+  width: 100%;
+}
+
+.themeMenuWrapper button {
+  width: 100%;
 }
 
 .themeMenu {

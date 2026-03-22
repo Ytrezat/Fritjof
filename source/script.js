@@ -53,49 +53,6 @@ class MoveNode {
   }
 }
 
-function serializeNode(node){
-  return {
-    board: node.board,
-    king: node.king,
-    move: node.move,
-    player: node.player,
-    moveNumber: node.moveNumber,
-    lastMoveWithCapture: node.lastMoveWithCapture,
-    moveHistory: node.moveHistory,
-    countPieces: node.countPieces,
-    comment: node.comment,
-    color: node.color,
-    annotations: node.annotations,
-    children: node.children.map(child => serializeNode(child))
-  }
-}
-
-function deserializeNode(obj, parent=null){
-
-  const node = new MoveNode(
-    obj.board,
-    obj.move,
-    parent,
-    obj.player,
-    obj.moveNumber
-  )
-  node.king = obj.king
-  node.lastMoveWithCapture = obj.lastMoveWithCapture
-  node.moveHistory = obj.moveHistory
-  node.countPieces = obj.countPieces
-  node.comment = obj.comment || ""
-  node.color = obj.color || 0
-  node.annotations = obj.annotations || {
-    highlights: [],
-    arrows: []
-  }
-  node.children = obj.children.map(childObj =>
-    deserializeNode(childObj, node)
-  )
-
-  return node
-}
-
 /* =============================================================================================================
 ======  MOVE EXECUTION  ======
 ============================================================================================================= */
@@ -325,6 +282,7 @@ function addVariationControls(div, node, activePathSet) {
     drawArrowExpander(expander,variationCount,hiddenCount)
     expander.addEventListener("click", e => {
       e.stopPropagation()
+      resetAllManualExpansions()
       focusNode(node, true)
     })
     div.appendChild(expander)
@@ -334,6 +292,7 @@ function addVariationControls(div, node, activePathSet) {
     drawArrowCollapser(collapse,variationCount)
     collapse.addEventListener("click", e => {
       e.stopPropagation()
+      resetAllManualExpansions()
       focusNode(node, false)
     })
     div.appendChild(collapse)
@@ -442,7 +401,7 @@ function focusNode(node, autoExpand = false) {
     checkEndGame(currentNode.move.to[0],currentNode.move.to[1])
   }
   // Reset previous manual expand/collapse state
-  resetAllManualExpansions()
+  //resetAllManualExpansions()
 
   // If requested, manually expand this node
   if (autoExpand && node.children.length > 1) {
@@ -725,7 +684,6 @@ function handlePlayerTurnsButtons(){
 }
 
 function onDoubleClick(e){
-
   if(gameMode !== "edit") return
 
     e.preventDefault();
@@ -742,9 +700,7 @@ function onDoubleClick(e){
       }
     }
   }
-
   board[x][y] = KING
-
   render()
 }
 
@@ -762,13 +718,11 @@ function handleArrowInput(){
     if (e.key === "ArrowLeft") {
         if (!currentNode.parent) return; // already at root
         currentNode = currentNode.parent;
-        const hasSubvariations = currentNode.children.length > 1
-        focusNode(currentNode, hasSubvariations)
+        focusNode(currentNode, false)
     } else if (e.key === "ArrowRight") {
         if (!currentNode.children || currentNode.children.length === 0) return;
         currentNode = currentNode.children[0];
-        const hasSubvariations = currentNode.children.length > 1
-        focusNode(currentNode, hasSubvariations)
+        focusNode(currentNode, false)
     }
   });
 }
@@ -777,8 +731,7 @@ function handleArrowInput(){
 function attachNodeEvents(div, node) {
   div.addEventListener("click", e => {
     e.stopPropagation()
-    const hasSubvariations = node.children.length > 1
-    focusNode(node, hasSubvariations)
+    focusNode(node, false)
   })
 
   div.addEventListener("contextmenu", e => {
@@ -786,12 +739,8 @@ function attachNodeEvents(div, node) {
     if (!node.parent) return;
     e.stopPropagation()
 
-    const hasSubvariations = node.children.length > 1;
-
-    // 1. Move to the clicked node
-    focusNode(node, hasSubvariations);
-
-    // 2. Then show menu
+    // Move to the clicked node, then show menu
+    focusNode(node, false);
     showContextMenu(e.clientX, e.clientY, node);
   })
 }
@@ -872,6 +821,27 @@ function inputListener(){
   handleArrowInput();
   handlePlayerTurnsButtons();
 }
+
+function showPuzzleMenu(puzzles) {
+  contextMenu.innerHTML = "";
+
+  puzzles.forEach(puzzle => {
+    const btn = document.createElement("button");
+    btn.textContent = puzzle.name;
+    btn.title = puzzle.file;
+
+    btn.addEventListener("click", () => {
+      loadPuzzleFromServer(puzzle.file);
+    });
+
+    contextMenu.appendChild(btn);
+  });
+
+  contextMenu.style.left = "200px";
+  contextMenu.style.top = "150px";
+  contextMenu.classList.remove("hidden");
+}
+
 
 /* =============================================================================================================
 ======  APP / CONTROLLER  ======
