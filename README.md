@@ -1,4 +1,4 @@
-Hnefatafl games review software
+Fritjof v2 - Hnefatafl games review web app
 
 ----------
 
