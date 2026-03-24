@@ -44,7 +44,8 @@ function serializeNode(node){
         (node.annotations.highlights.length || node.annotations.arrows.length))
       ? node.annotations
       : undefined,
-    ch: node.children.map(child => serializeNode(child))
+    ch: node.children.map(child => serializeNode(child)),
+    g: node.gameover
   }
 }
 
@@ -77,6 +78,7 @@ function deserializeNode(obj, parent=null, parentBoard=null){
   node.children = obj.ch.map(childObj =>
     deserializeNode(childObj, node, board)
   )
+  node.gameover = obj.g || 0
   return node
 }
 
@@ -210,6 +212,25 @@ function importSimpleGame(text) {
     const parts = line.split(/\s+/);
 
     for (let part of parts) {
+
+      // ✅ HANDLE RESIGNATION
+      if (part.toLowerCase().includes("resigned")) {
+
+        // currentPlayer is the player to move → that player resigns
+        [xk,yk] = [0,0]
+        makeMove(xk,yk,xk,yk)
+        if (currentPlayer === DEFENDER) {
+          currentNode.gameover = 1; // black resigns → white wins
+        } else {
+          currentNode.gameover = -1; // white resigns → black wins
+        }
+
+        // trigger UI update
+        checkEndGame(0,0)
+        break;
+      }
+
+      // normal move
       if (!part.includes("-")) continue;
 
       const move = parseMove(part);
@@ -233,11 +254,213 @@ function pasteSimpleGame() {
   const text = prompt("Paste game notation:")
   if (!text) return
 
+  const name = "(unnamed)"
+
   try {
     importSimpleGame(text)
+
+    // ✅ Set title from user input
+    analysisName = name ? name.trim() : "Game analysis"
+    updateAnalysisNameUI()
+
   } catch (e) {
     alert("Failed to import game: " + e.message)
   }
+}
+
+/* =============================================================================================================
+   IMPORT A GAME FROM AAGENIELSEN.DK
+============================================================================================================= */
+
+function parsePlayer(str){
+  if (!str) return { name: "", country: "" }
+
+  const parts = str.split(",").map(s => s.trim())
+
+  return {
+    name: parts[0] || "",
+    country: parts[parts.length - 1] || ""
+  }
+}
+
+function extractDateTime(line){
+  // Example: "2025-11-12 11:49:38 (Copenhagen time)"
+  const match = line.match(/(\d{4}-\d{2}-\d{2})\s+(\d{2}):(\d{2})/)
+
+  if (!match) return { date: "", time: "" }
+
+  return {
+    date: match[1],
+    time: `${match[2]}:${match[3]}`
+  }
+}
+
+function parseGameFile(text) {
+  const lines = text.split("\n").map(l => l.trim());
+
+  const metadata = {
+    event: "",
+    white: "",
+    black: "",
+    result: "",
+    date: "",
+    variant: ""
+  };
+
+  let movesStarted = false;
+  let movesLines = [];
+
+  for (let line of lines) {
+    if (!line) continue;
+
+    // --- METADATA ---
+    if (!movesStarted) {
+      if (line.startsWith("Event:")) {
+        metadata.event = line.replace("Event:", "").trim();
+        continue;
+      }
+      if (line.startsWith("White:")) {
+        metadata.white = line.replace("White:", "").trim();
+        continue;
+      }
+      if (line.startsWith("Black:")) {
+        metadata.black = line.replace("Black:", "").trim();
+        continue;
+      }
+      if (line.includes("won")) {
+        metadata.result = line;
+        continue;
+      }
+      if (line.match(/\d{4}-\d{2}-\d{2}/)) {
+        const dt = extractDateTime(line)
+        metadata.date = dt.date
+        metadata.time = dt.time
+        continue
+      }
+      if (line.toLowerCase().includes("hnefatafl")) {
+        metadata.variant = line;
+        continue;
+      }
+
+      // Detect start of moves
+      if (line.match(/^\d+\./)) {
+        movesStarted = true;
+      }
+    }
+
+    // --- MOVES ---
+    if (movesStarted) {
+      movesLines.push(line);
+    }
+  }
+
+  return {
+    metadata,
+    movesText: movesLines.join("\n")
+  };
+}
+
+function formatMetadataLines(metadata){
+  const w = parsePlayer(metadata.white)
+  const b = parsePlayer(metadata.black)
+
+  const line1 = `${w.name} (${w.country}) - ${b.name} (${b.country})`
+
+  // ✅ Build line2 flexibly
+  const parts = []
+
+  if (metadata.event) parts.push(metadata.event)
+
+  if (metadata.date && metadata.time) {
+    parts.push(`${metadata.date} ${metadata.time}`)
+  } else if (metadata.date) {
+    parts.push(metadata.date)
+  } else if (metadata.time) {
+    parts.push(metadata.time)
+  }
+
+  const line2 = parts.join(", ")
+
+  return { line1, line2 }
+}
+
+function importFullGame(text) {
+  const { metadata, movesText } = parseGameFile(text);
+
+  rootMetadata = metadata;
+
+  importSimpleGame(movesText);
+
+  if (rootNode) {
+    rootNode.metadata = metadata;
+  }
+
+  const { line1 } = formatMetadataLines(metadata);
+  analysisName = line1 || "Game analysis";
+  updateAnalysisNameUI();
+
+  updateMetadataUI(metadata);
+}
+
+function updateMetadataUI(meta) {
+  const el = document.getElementById("gameMetadata");
+  if (!el) return;
+
+  const { line2 } = formatMetadataLines(meta);
+
+  // ✅ Hide if nothing to show
+  if (!line2) {
+    el.innerHTML = "";
+    return;
+  }
+
+  el.innerHTML = `<div>${line2}</div>`;
+}
+
+function formatGameTitle(metadata){
+  if (!metadata) return ""
+
+  const white = metadata.white || "White"
+  const black = metadata.black || "Black"
+
+  const event = metadata.event || ""
+  const date = metadata.date ? metadata.date.split(" ")[0] : ""
+
+  let extra = ""
+
+  if (event && date) extra = ` (${event}, ${date})`
+  else if (event) extra = ` (${event})`
+  else if (date) extra = ` (${date})`
+
+  return `${white} - ${black}${extra}`
+}
+
+function importGameFile(event){
+  const file = event.target.files[0]
+  if(!file) return
+
+  const fileName = file.name.replace(/\.txt$/i, "").replace(/_/g, " ")
+  analysisName = fileName
+  updateAnalysisNameUI()
+
+  const reader = new FileReader()
+
+  reader.onload = function(e){
+    try{
+      const text = e.target.result
+
+      // Use the parser we defined earlier
+      importFullGame(text)
+
+    }catch(err){
+      alert("Failed to load game: " + err.message)
+    }
+  }
+
+  reader.readAsText(file)
+
+  // reset input so same file can be reloaded
+  event.target.value = ""
 }
 
 /* =============================================================================================================

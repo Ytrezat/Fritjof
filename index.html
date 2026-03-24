@@ -45,13 +45,16 @@
         <input type="file" id="importFile" style="display:none" onchange="importAnalysis(event)">
         <button onclick="document.getElementById('importFile').click()">Import</button>
         <button onclick="pasteSimpleGame()">Import move list</button>
-        <button onclick="loadPuzzleList()">Open Puzzle</button>
+        <input type="file" id="importGameFile" style="display:none" accept=".txt" onchange="importGameFile(event)">
+        <button onclick="document.getElementById('importGameFile').click()">Open game</button>
+        <button onclick="loadPuzzleList()">Open puzzle</button>
       </div>
     </div>
 
     <div id="leftPanel">
       <h3 id="boardTitle">Copenhagen Hnefatafl Analysis Board</h3>
       <div id="analysisNameDisplay" style="font-size:16px; color:#444; margin-bottom:10px;"></div>
+      <div id="gameMetadata" style="font-size:13px; color:#555; margin-bottom:10px;"></div>
 
       <div id="boardFrame">
         <div class="coord-corner"></div>

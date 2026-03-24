@@ -40,6 +40,7 @@ class MoveNode {
       highlights: [], // e.g. [{ square: "e4" }]
       arrows: [],     // e.g. [{ from: "e2", to: "e4" }]
     }
+    this.gameover = 0 // 0: ongoing, -1: white resigns, 1: black resigns, 2: draw
   }
 }
 
@@ -113,11 +114,28 @@ function checkEndGame(x,y){ //x,y is the destination of the last piece that move
   winner = null;
   winType = "";
   winSquares = [];
-  checkInfiniteGame(currentNode.moveNumber,currentNode.lastMoveWithCapture,currentNode.move.to)
-  if(board[x][y]===KING) checkWinforWhite(x,y);
-  if(board[x][y]===ATTACKER) checkWinforBlack(x,y,currentNode.king);
-  if (currentNode.moveHistory.length === MAXLENGTH_DIRECTION_REPETITION){
-    checkRepetition(currentNode.moveHistory);
+  if(currentNode.gameover===-1){
+     winner = "black";
+     winType = "White resigned"
+     winSquares = [currentNode.king]
+  }
+  else if(currentNode.gameover===1){
+     winner = "white";
+     winType = "Black resigned"
+     winSquares = [currentNode.king]
+  }
+  else if(currentNode.gameover===2){
+     winner = "draw";
+     winType = ""
+     winSquares = [[5,5]]
+  }
+  else{
+    checkInfiniteGame(currentNode.moveNumber,currentNode.lastMoveWithCapture,currentNode.move.to)
+    if(board[x][y]===KING) checkWinforWhite(x,y);
+    if(board[x][y]===ATTACKER) checkWinforBlack(x,y,currentNode.king);
+    if (currentNode.moveHistory.length === MAXLENGTH_DIRECTION_REPETITION){
+      checkRepetition(currentNode.moveHistory);
+    }
   }
 }
 /* =============================================================================================================
