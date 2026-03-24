@@ -271,6 +271,7 @@ function pasteSimpleGame() {
     // ✅ Set title from user input
     analysisName = name ? name.trim() : "Game analysis"
     updateAnalysisNameUI()
+    updateMetadataUI("");
 
   } catch (e) {
     alert("Failed to import game: " + e.message)
@@ -412,18 +413,13 @@ function importFullGame(text) {
 }
 
 function updateMetadataUI(meta) {
-  const el = document.getElementById("gameMetadata");
-  if (!el) return;
-
   const { line2 } = formatMetadataLines(meta);
-
-  // ✅ Hide if nothing to show
   if (!line2) {
-    el.innerHTML = "";
+    lineMetaData.innerHTML = "";
     return;
   }
 
-  el.innerHTML = `<div>${line2}</div>`;
+  lineMetaData.innerHTML = `<div>${line2}</div>`;
 }
 
 function formatGameTitle(metadata){
@@ -516,7 +512,7 @@ function loadPuzzleFromServer(fileName) {
     .then(data => {
       analysisName = fileName.replace(/\.json$/i, "").replace(/_/g, " ");
       updateAnalysisNameUI();
-
+      updateMetadataUI("");
       loadAnalysisData(data);   // same core
     })
     .catch(err => {
