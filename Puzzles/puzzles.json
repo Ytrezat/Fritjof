@@ -1,4 +1,5 @@
 [
-  { "name": "Puzzle 013 (Luizz)", "file": "Puzzle_013_-_Luizz.json" },
-  { "name": "TBD", "file": "Puzzle_013_-_Luizz.json" }
+  { "name": "Puzzle 13 (Luizz)", "file": "Puzzle_13__Luizz_.json", "level": "3" },
+  { "name": "Puzzle 8 (Hagbard)", "file": "Puzzle_8__Hagbard_.json", "level": "1" },
+  { "name": "Puzzle 7 (Hagbard)", "file": "Puzzle_7__Hagbard_.json", "level": "0" }
 ] 

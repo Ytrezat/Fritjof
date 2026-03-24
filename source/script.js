@@ -426,6 +426,7 @@ function focusNode(node, autoExpand = false) {
 function onLeftClick(){
   document.addEventListener("click", () => {
     contextMenu.classList.add("hidden");
+    leftfloatingMenu.classList.add("hidden");
   });
 }
 
@@ -658,8 +659,10 @@ function handleEditClick(e){
 
   // If square already occupied → delete piece
   if(piece !== EMPTY){
-    if(board[x][y]===DEFENDER){currentNode.countPieces[1]-=1;}
-    if(board[x][y]===ATTACKER){currentNode.countPieces[0]-=1;}
+    if(piece !== KING){
+      if(board[x][y]===DEFENDER){currentNode.countPieces[1]-=1;}
+      if(board[x][y]===ATTACKER){currentNode.countPieces[0]-=1;}
+    }
     board[x][y] = EMPTY
     return
   }
@@ -705,6 +708,10 @@ function onDoubleClick(e){
 
   let [kx,ky] = currentNode.king
   board[kx][ky] = EMPTY
+
+  if(board[x][y]===DEFENDER){currentNode.countPieces[1]-=1;}
+  if(board[x][y]===ATTACKER){currentNode.countPieces[0]-=1;}
+
   board[x][y] = KING
   currentNode.king = [x,y]
   render()
@@ -834,46 +841,184 @@ function inputListener(){
   handlePlayerTurnsButtons();
 }
 
-function showArchiveMenu(games) {
-  contextMenu.innerHTML = "";
-
-  games.forEach(game => {
-    const btn = document.createElement("button");
-    btn.textContent = game.name;
-    btn.title = game.file;
-
-    btn.addEventListener("click", () => {
-      loadGameFromServer(game.file);
-    });
-
-    contextMenu.appendChild(btn);
-  });
-
-  contextMenu.style.left = "200px";
-  contextMenu.style.top = "150px";
-  contextMenu.classList.remove("hidden");
+/* ============================================
+   MODERN CONTEXT MENU HELPERS
+============================================ */
+function styleContextMenu() {
+  leftfloatingMenu.style.padding = "14px";
+  leftfloatingMenu.style.minWidth = "320px";
+  leftfloatingMenu.style.maxHeight = "520px";
+  leftfloatingMenu.style.overflowY = "auto";
+  leftfloatingMenu.style.borderRadius = "14px";
+  leftfloatingMenu.style.boxShadow = "0 12px 28px rgba(0,0,0,0.28)";
+  leftfloatingMenu.style.background = "rgba(28,28,32)";
+  leftfloatingMenu.style.border = "1px solid rgba(255,255,255,0.08)";
 }
 
+function createMenuSection(title, color = "#7aa7ff", count = 0) {
+  const sectionWrap = document.createElement("div");
+  sectionWrap.style.padding = "10px";
+  sectionWrap.style.marginBottom = "14px";
+  sectionWrap.style.borderRadius = "12px";
+  sectionWrap.style.background = "rgba(255,255,255,0.03)";
+  sectionWrap.style.border = "1px solid rgba(255,255,255,0.05)";
+
+  // Header row
+  const headerRow = document.createElement("div");
+  headerRow.style.display = "flex";
+  headerRow.style.alignItems = "center";
+  headerRow.style.gap = "8px";
+  headerRow.style.marginBottom = "10px";
+
+  const dot = document.createElement("span");
+  dot.style.width = "8px";
+  dot.style.height = "8px";
+  dot.style.borderRadius = "50%";
+  dot.style.background = color;
+  dot.style.flexShrink = "0";
+  headerRow.appendChild(dot);
+
+  const heading = document.createElement("div");
+  heading.textContent = title;
+  heading.style.fontFamily = "Inter, Arial, sans-serif";
+  heading.style.fontSize = "11px";
+  heading.style.fontWeight = "700";
+  heading.style.letterSpacing = "0.08em";
+  heading.style.textTransform = "uppercase";
+  heading.style.color = "rgba(255,255,255,0.75)";
+  headerRow.appendChild(heading);
+
+  if (count > 0) {
+    const countEl = document.createElement("div");
+    countEl.textContent = `${count}`;
+    countEl.style.marginLeft = "auto";
+    countEl.style.fontFamily = "Inter, Arial, sans-serif";
+    countEl.style.fontSize = "11px";
+    countEl.style.fontWeight = "600";
+    countEl.style.color = "rgba(255,255,255,0.45)";
+    headerRow.appendChild(countEl);
+  }
+
+  sectionWrap.appendChild(headerRow);
+  return sectionWrap;
+}
+
+function createMenuButton(label, onClick) {
+  const btn = document.createElement("button");
+  btn.textContent = label;
+  btn.style.display = "block";
+  btn.style.width = "100%";
+  btn.style.margin = "0 0 6px 0";
+  btn.style.padding = "10px 12px";
+  btn.style.borderRadius = "10px";
+  btn.style.border = "1px solid rgba(255,255,255,0.06)";
+  btn.style.background = "rgba(255,255,255,0.04)";
+  btn.style.color = "rgba(255,255,255,0.92)";
+  btn.style.fontFamily = "Inter, Arial, sans-serif";
+  btn.style.fontSize = "13px";
+  btn.style.fontWeight = "500";
+  btn.style.textAlign = "left";
+  btn.style.cursor = "pointer";
+  btn.style.transition = "background 0.15s ease, border-color 0.15s ease, transform 0.08s ease";
+
+  btn.addEventListener("mouseenter", () => {
+    btn.style.background = "rgba(255,255,255,0.08)";
+    btn.style.borderColor = "rgba(255,255,255,0.12)";
+  });
+
+  btn.addEventListener("mouseleave", () => {
+    btn.style.background = "rgba(255,255,255,0.04)";
+    btn.style.borderColor = "rgba(255,255,255,0.06)";
+    btn.style.transform = "translateY(0)";
+  });
+
+  btn.addEventListener("mousedown", () => btn.style.transform = "translateY(1px)");
+  btn.addEventListener("mouseup", () => btn.style.transform = "translateY(0)");
+  btn.addEventListener("click", onClick);
+
+  return btn;
+}
+
+/* ============================================
+   SHOW PUZZLE MENU
+============================================ */
 function showPuzzleMenu(puzzles) {
-  contextMenu.innerHTML = "";
+  leftfloatingMenu.innerHTML = "";
+  styleContextMenu()
 
-  puzzles.forEach(puzzle => {
-    const btn = document.createElement("button");
-    btn.textContent = puzzle.name;
-    btn.title = puzzle.file;
+  const groups = { "1": [], "2": [], "3": [], "0": [] };
+  puzzles.forEach(p => (groups[String(p.level || "0")] || groups["0"]).push(p));
 
-    btn.addEventListener("click", () => {
-      loadPuzzleFromServer(puzzle.file);
+  const sections = [
+    { level: "1", title: "Easy", color: "#66d17a" },
+    { level: "2", title: "Intermediate", color: "#f0b35a" },
+    { level: "3", title: "Hard", color: "#e46b6b" },
+    { level: "0", title: "Unknown", color: "#aaaaaa" }
+  ];
+
+  sections.forEach(sec => {
+    const items = groups[sec.level];
+    if (!items.length) return;
+
+    const sectionWrap = createMenuSection(sec.title, sec.color, items.length);
+
+    items.forEach(puzzle => {
+      sectionWrap.appendChild(
+        createMenuButton(puzzle.name, () => loadPuzzleFromServer(puzzle.file))
+      );
     });
 
-    contextMenu.appendChild(btn);
+    leftfloatingMenu.appendChild(sectionWrap);
   });
 
-  contextMenu.style.left = "200px";
-  contextMenu.style.top = "150px";
-  contextMenu.classList.remove("hidden");
+  leftfloatingMenu.style.left = "200px";
+  leftfloatingMenu.style.top = "150px";
+  leftfloatingMenu.classList.remove("hidden");
 }
 
+/* ============================================
+   SHOW GAME ARCHIVE MENU
+============================================ */
+function showArchiveMenu(games) {
+  leftfloatingMenu.innerHTML = "";
+  styleContextMenu();
+
+  // Group games by win_type
+  const groups = {};
+  games.forEach(game => {
+    const type = game.win_type || "U"; // U = Unknown
+    if (!groups[type]) groups[type] = [];
+    groups[type].push(game);
+  });
+
+  // Define sections with colors and labels
+  const sections = [
+    { type: "W corner", title: "White Wins: Corner escape", color: "#66d17a" },
+    { type: "W fort", title: "White Wins: Edge fort", color: "#66d17a" },
+    { type: "B", title: "Black Wins", color: "#e46b6b" },
+    { type: "D", title: "Draw", color: "#f0b35a" },
+    { type: "U", title: "Unkown", color: "#aaaaaa" }
+  ];
+
+  sections.forEach(sec => {
+    const items = groups[sec.type];
+    if (!items || !items.length) return;
+
+    const sectionWrap = createMenuSection(sec.title, sec.color, items.length);
+
+    items.forEach(game => {
+      sectionWrap.appendChild(
+        createMenuButton(game.name, () => loadGameFromServer(game.file))
+      );
+    });
+
+    leftfloatingMenu.appendChild(sectionWrap);
+  });
+
+  leftfloatingMenu.style.left = "200px";
+  leftfloatingMenu.style.top = "150px";
+  leftfloatingMenu.classList.remove("hidden");
+}
 
 /* =============================================================================================================
 ======  APP / CONTROLLER  ======

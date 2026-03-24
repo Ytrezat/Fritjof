@@ -35,4 +35,5 @@ let winSquares = [];     // coordinates of squares contributing to the win
    DOM
 ============================= */
 const boardEl = document.getElementById("board")
+const leftfloatingMenu = document.getElementById("leftContextMenu");
 const contextMenu = document.getElementById("treeContextMenu");
