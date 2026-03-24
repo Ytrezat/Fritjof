@@ -701,10 +701,16 @@ function saveComment(){
 
 function handleArrowInput(){
   document.addEventListener("keydown", (e) => {
-    if (gameMode !== "play") return; // only in play mode
+    if (gameMode !== "play") return;
+
+    //Disable when typing in comment input
+    const activeEl = document.activeElement;
+    if (activeEl && (activeEl.id === "commentInput" || activeEl.tagName === "TEXTAREA" || activeEl.tagName === "INPUT")) {
+      return;
+    }
 
     if (e.key === "ArrowLeft") {
-        if (!currentNode.parent) return; // already at root
+        if (!currentNode.parent) return;
         currentNode = currentNode.parent;
         focusNode(currentNode, false)
     } else if (e.key === "ArrowRight") {
