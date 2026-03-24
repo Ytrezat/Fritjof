@@ -628,7 +628,9 @@ function handlePlayLeftClick(x, y){
 }
 
 function handleEditClick(e){
-  if (e.detail === 2) return;
+  if (e.detail === 2) onDoubleClick(e);
+
+  else{
   e.preventDefault() // important for right-click
 
   const x = +e.currentTarget.dataset.x
@@ -659,6 +661,7 @@ function handleEditClick(e){
   if(e.button === 2){
     board[x][y] = ATTACKER
     currentNode.countPieces[0]+=1;
+  }
   }
 }
 
