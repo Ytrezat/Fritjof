@@ -834,6 +834,26 @@ function inputListener(){
   handlePlayerTurnsButtons();
 }
 
+function showArchiveMenu(games) {
+  contextMenu.innerHTML = "";
+
+  games.forEach(game => {
+    const btn = document.createElement("button");
+    btn.textContent = game.name;
+    btn.title = game.file;
+
+    btn.addEventListener("click", () => {
+      loadGameFromServer(game.file);
+    });
+
+    contextMenu.appendChild(btn);
+  });
+
+  contextMenu.style.left = "200px";
+  contextMenu.style.top = "150px";
+  contextMenu.classList.remove("hidden");
+}
+
 function showPuzzleMenu(puzzles) {
   contextMenu.innerHTML = "";
 

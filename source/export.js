@@ -435,8 +435,7 @@ function formatGameTitle(metadata){
   return `${white} - ${black}${extra}`
 }
 
-function importGameFile(event){
-  const file = event.target.files[0]
+function importGameFile(file){
   if(!file) return
 
   const fileName = file.name.replace(/\.txt$/i, "").replace(/_/g, " ")
@@ -448,8 +447,6 @@ function importGameFile(event){
   reader.onload = function(e){
     try{
       const text = e.target.result
-
-      // Use the parser we defined earlier
       importFullGame(text)
 
     }catch(err){
@@ -460,8 +457,32 @@ function importGameFile(event){
   reader.readAsText(file)
 
   // reset input so same file can be reloaded
-  event.target.value = ""
 }
+
+async function loadGameArchive() {
+  try {
+    const res = await fetch("Games_Archive/games.json");
+    const games = await res.json();
+
+    showArchiveMenu(games);
+
+  } catch (err) {
+    alert("Failed to load games archive");
+    console.error(err);
+  }
+}
+
+async function loadGameFromServer(fileName) {
+  try {
+    const res = await fetch(`Games_Archive/${fileName}`)
+    const text = await res.text()
+    importFullGame(text)
+
+  } catch (err) {
+    alert("Failed to load game: " + err.message)
+  }
+}
+
 
 /* =============================================================================================================
    OPEN PUZZLE

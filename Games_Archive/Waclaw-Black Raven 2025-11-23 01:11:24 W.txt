@@ -1,0 +1,38 @@
+White:  Waclaw, Omsk, Russia
+Black:  Black Raven, Pennsylvania, United States
+Copenhagen Hnefatafl 11x11
+White won.
+2025-11-23 01:11:24 (Copenhagen time)
+
+hnefatafl board
+
+	black	white
+1.     	h1-h3     	f4-i4
+2.     	f2-i2     	g5-g3
+3.     	d1-d3     	i4-i3xh3
+4.     	j6-j3     	f5-i5
+5.     	g1-h1     	f6-f4
+6.     	a4-c4     	e5-b5
+7.     	a7-c7     	b5-b2
+8.     	b6-b3     	g7-g10
+9.     	h11-h10xg10     	g6-g10
+10.     	k8-i8     	e7-e10xf10
+11.     	d11-d9     	e10-b10
+12.     	e11-b11     	b10-b4xb3
+13.     	a5-a4xb4     	f4-d4
+14.     	b11-b3     	e6-e2
+15.     	e1-b1xb2     	e2-d2xd3
+16.     	c4-c2     	d4-e4
+17.     	d9-e9     	e4-e1
+18.     	b1-d1     	g3-g1xf1
+19.     	k4-i4xi3     	e1-e8
+20.     	f11-f10xg10     	e8-c8
+21.     	f10-c10     	c8-c9
+22.     	b3-b9     	i5-a5
+23.     	j3-b3     	c9-c8
+24.     	c7-a7     	d2-e2
+25.     	e9-d9     	e2-e1
+26.     	i4-f4     	c8-e8
+27.     	k7-k9     	e8-e4
+28.     	f4-f1xe1xg1     	e4-j4
+29.     	resigned
