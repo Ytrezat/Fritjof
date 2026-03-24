@@ -459,60 +459,58 @@ function importGameFile(file){
   // reset input so same file can be reloaded
 }
 
-async function loadGameArchive() {
-  try {
-    const res = await fetch("Games_Archive/games.json");
-    const games = await res.json();
-
-    showArchiveMenu(games);
-
-  } catch (err) {
-    alert("Failed to load games archive");
-    console.error(err);
-  }
+function loadGameArchive() {
+  fetch("Games_Archive/games.json")
+    .then(res => res.json())
+    .then(games => {
+      showArchiveMenu(games);
+    })
+    .catch(err => {
+      alert("Failed to load games archive");
+      console.error(err);
+    });
 }
 
-async function loadGameFromServer(fileName) {
-  try {
-    const res = await fetch(`Games_Archive/${fileName}`)
-    const text = await res.text()
-    importFullGame(text)
+function loadGameFromServer(fileName) {
+  fetch(`Games_Archive/${fileName}`)
+    .then(res => res.text())
+    .then(text => {
+      analysisName = fileName.replace(/\.[^.]+$/i, "").replace(/_/g, " ");
+      updateAnalysisNameUI();
 
-  } catch (err) {
-    alert("Failed to load game: " + err.message)
-  }
+      importFullGame(text);
+    })
+    .catch(err => {
+      alert("Failed to load game: " + err.message);
+    });
 }
-
 
 /* =============================================================================================================
    OPEN PUZZLE
 ============================================================================================================= */
 
-async function loadPuzzleList() {
-  try {
-    const res = await fetch("Puzzles/puzzles.json");
-    const puzzles = await res.json();
-
-    showPuzzleMenu(puzzles);
-
-  } catch (err) {
-    alert("Failed to load puzzle list");
-    console.error(err);
-  }
+function loadPuzzleList() {
+  fetch("Puzzles/puzzles.json")
+    .then(res => res.json())
+    .then(puzzles => {
+      showPuzzleMenu(puzzles);
+    })
+    .catch(err => {
+      alert("Failed to load puzzle list");
+      console.error(err);
+    });
 }
 
+function loadPuzzleFromServer(fileName) {
+  fetch(`Puzzles/${fileName}`)
+    .then(res => res.json())
+    .then(data => {
+      analysisName = fileName.replace(/\.json$/i, "").replace(/_/g, " ");
+      updateAnalysisNameUI();
 
-async function loadPuzzleFromServer(fileName) {
-  try {
-    const res = await fetch(`Puzzles/${fileName}`)
-    const data = await res.json()
-
-    analysisName = fileName.replace(/\.json$/i, "").replace(/_/g, " ")
-    updateAnalysisNameUI()
-
-    loadAnalysisData(data)   // ✅ SAME CORE
-
-  } catch (err) {
-    alert("Failed to load puzzle: " + err.message)
-  }
+      loadAnalysisData(data);   // same core
+    })
+    .catch(err => {
+      alert("Failed to load puzzle: " + err.message);
+    });
 }
