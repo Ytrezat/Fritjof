@@ -354,7 +354,15 @@ function drawMoveTag(div,node,currentNode,pos,activePathSet){
         }
 
         const label = document.createElement("span")
-        label.textContent = moveToNotation(node.move)
+        if(node.gameover===0){
+          label.textContent = moveToNotation(node.move)
+        }
+        else if(node.gameover===2){
+          label.textContent = "Draw"
+        }
+        else{
+          label.textContent = "Resigned"
+        }
         label.style.color = isBlackMove ? "#fff" : "#000";
         label.style.background = isBlackMove ? "#000" : "#f8f8f8";
         label.style.padding = "1px 4px";
