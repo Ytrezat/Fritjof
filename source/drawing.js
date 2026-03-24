@@ -217,7 +217,13 @@ function renderAnnotations() {
 function updateTurnUI(currentPlayer,winner) {
   const turnEl = document.getElementById("turnIndicator");
   if (winner) {
-    turnEl.textContent = `${winner.charAt(0).toUpperCase() + winner.slice(1)} ${winner==="draw" ? "" : "wins"} (${winType})`;
+    if(winType!=""){
+      turnEl.textContent = `${winner.charAt(0).toUpperCase() + winner.slice(1)} ${winner==="draw" ? "" : "wins"} (${winType})`;
+    }
+    else
+    {
+      turnEl.textContent = `${winner.charAt(0).toUpperCase() + winner.slice(1)} ${winner==="draw" ? "" : "wins"}`;
+    }
     turnEl.style.color = "gold";       // highlight in gold
     turnEl.style.fontWeight = "bold";
   } else {
