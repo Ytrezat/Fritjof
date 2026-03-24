@@ -230,6 +230,15 @@ function importSimpleGame(text) {
         break;
       }
 
+      if (part.toLowerCase().includes("draw")) {
+        [xk,yk] = [0,0]
+        makeMove(xk,yk,xk,yk)
+        currentNode.gameover = 2;
+        // trigger UI update
+        checkEndGame(0,0)
+        break;
+      }
+
       // normal move
       if (!part.includes("-")) continue;
 
