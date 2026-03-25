@@ -995,6 +995,7 @@ function showArchiveMenu(games) {
   const sections = [
     { type: "W corner", title: "White Wins: Corner escape", color: "#66d17a" },
     { type: "W fort", title: "White Wins: Edge fort", color: "#66d17a" },
+    { type: "W", title: "White Wins: Others", color: "#66d17a" },
     { type: "B", title: "Black Wins", color: "#e46b6b" },
     { type: "D", title: "Draw", color: "#f0b35a" },
     { type: "U", title: "Unkown", color: "#aaaaaa" }
