@@ -119,13 +119,6 @@ def extract_result_and_win_type(text: str) -> tuple[str, str]:
         return "W", "W"
     if re.search(r'\bDraw\.', text, re.IGNORECASE):
         return "D", "D"
-
-    # Optional extended patterns if your files contain these in future
-    if re.search(r'\bWhite won by corner\b', text, re.IGNORECASE):
-        return "W", "W corner"
-    if re.search(r'\bBlack won by corner\b', text, re.IGNORECASE):
-        return "B", "B corner"
-
     return "U", "U"
 
 
