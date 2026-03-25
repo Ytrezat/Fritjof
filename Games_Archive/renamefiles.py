@@ -17,15 +17,25 @@ GAMES_JSON = FOLDER / "games.json"
 DRY_RUN = False                  # True = preview only, False = actually rename/write
 # ====================
 
-
-def sanitize_filename_part(name: str) -> str:
+def normalize_display_name(name: str) -> str:
     """
-    Safe for filenames. Removes forbidden chars and collapses spaces.
-    Keeps underscores if already present.
+    For JSON display names only.
+    Example: Black_Raven -> Black Raven
     """
     name = name.strip()
     name = re.sub(r'[<>:"/\\|?*]', '', name)
-    name = re.sub(r'\s+', '_', name)  # spaces -> underscore
+    name = name.replace("_", " ")
+    name = re.sub(r'\s+', ' ', name)
+    return name
+
+def sanitize_filename_part(name: str) -> str:
+    """
+    Safe for filenames. Removes forbidden chars and removes spaces/underscores.
+    """
+    name = name.strip()
+    name = re.sub(r'[<>:"/\\|?*]', '', name)
+    name = name.replace("_", "")
+    name = re.sub(r'\s+', '', name)   # remove spaces
     return name
 
 
@@ -152,14 +162,25 @@ def parse_game_file(filepath: Path):
     event_code = extract_event_code(event_text)
     event_display = extract_event_display(event_text)
 
-    white = None
-    black = None
-
+    white_raw = None
+    black_raw = None
+    
     for line in lines:
-        if white is None and line.strip().lower().startswith("white:"):
-            white = extract_player(line, "White")
-        if black is None and line.strip().lower().startswith("black:"):
-            black = extract_player(line, "Black")
+        if white_raw is None and line.strip().lower().startswith("white:"):
+            m = re.match(r'^White:\s*(.+)$', line.strip(), re.IGNORECASE)
+            if m:
+                white_raw = m.group(1).split(",")[0].strip()
+    
+        if black_raw is None and line.strip().lower().startswith("black:"):
+            m = re.match(r'^Black:\s*(.+)$', line.strip(), re.IGNORECASE)
+            if m:
+                black_raw = m.group(1).split(",")[0].strip()
+    
+    white = sanitize_filename_part(white_raw) if white_raw else None
+    black = sanitize_filename_part(black_raw) if black_raw else None
+    
+    white_display = normalize_display_name(white_raw) if white_raw else None
+    black_display = normalize_display_name(black_raw) if black_raw else None
 
     result_code, win_type = extract_result_and_win_type(text)
     date_part, time_part, display_time = extract_datetime(text)
@@ -174,8 +195,8 @@ def parse_game_file(filepath: Path):
 
     # JSON display name:
     # "WTF 2025 Casshern-Draganov 2025-11-12 11:49"
-    json_name = f"{event_display} {white}-{black} {date_part} {display_time}"
-
+    json_name = f"{event_display} {white_display}-{black_display} {date_part} {display_time}"
+    
     # Sort key
     dt = datetime.strptime(f"{date_part} {time_part}", "%Y-%m-%d %H%M%S")
 
@@ -220,7 +241,9 @@ def extract_sort_dt_from_entry(entry: dict) -> datetime:
 
 def merge_games(existing: list[dict], new_entries: list[dict]) -> list[dict]:
     """
-    Deduplicate by 'file' (new entries replace old ones with same filename)
+    Deduplicate by 'file'.
+    If an entry already exists with the same filename, KEEP the existing one
+    (so manual win_type edits are preserved).
     """
     merged = {}
 
@@ -230,7 +253,9 @@ def merge_games(existing: list[dict], new_entries: list[dict]) -> list[dict]:
             merged[file_key] = entry
 
     for entry in new_entries:
-        merged[entry["file"]] = entry
+        file_key = entry["file"]
+        if file_key not in merged:
+            merged[file_key] = entry
 
     games = list(merged.values())
     games.sort(key=extract_sort_dt_from_entry)

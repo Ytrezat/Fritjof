@@ -5,18 +5,18 @@
     "win_type": "B"
   },
   {
-    "name": " Waclaw-Black_Raven 2025-11-23 01:11",
-    "file": "Waclaw-Black_Raven_2025-11-23_011124_W.txt",
-    "win_type": "W"
+    "name": " Waclaw-Black Raven 2025-11-23 01:11",
+    "file": "Waclaw-BlackRaven_2025-11-23_011124_W.txt",
+    "win_type": "W corner"
   },
   {
-    "name": " Draganov-Black_Raven 2026-01-24 18:12",
-    "file": "Draganov-Black_Raven_2026-01-24_181258_D.txt",
+    "name": " Draganov-Black Raven 2026-01-24 18:12",
+    "file": "Draganov-BlackRaven_2026-01-24_181258_D.txt",
     "win_type": "D"
   },
   {
     "name": " Thibault-floki 2026-03-19 20:17",
     "file": "Thibault-floki_2026-03-19_201740_W.txt",
-    "win_type": "W"
+    "win_type": "W fort"
   }
 ]
