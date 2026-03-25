@@ -166,7 +166,7 @@ function custodialCapture(board,x,y){
 
     if (board[x2][y2] !== EMPTY || isHostileSquare(x2,y2) ){
       const player_end = (board[x2][y2] === ATTACKER) ? ATTACKER : DEFENDER;
-      if(player_end===player || isHostileSquare(x2,y2)){
+      if(player_end===player || isCorner(x2,y2) || player===DEFENDER && isThrone(x2,y2) || player===ATTACKER && isThrone(x2,y2) && board[x2][y2]===EMPTY) {
         removed.push([x1,y1])
     }
     }
