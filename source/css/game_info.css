@@ -1,0 +1,148 @@
+ #boardTitle {
+  text-align: center;
+  margin: 0 0 10px 0;
+}
+
+#boardHint {
+  width: 620px;              /* match board width */
+  margin-top: 0px;
+  margin-left: 80px;         /* align with board like #turnBar */
+
+  text-align: right;
+  font-size: 11px;
+  color: #666;
+  font-style: italic;
+  font-family: Arial;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+#leftPanel.edit-mode #boardHint {
+  display: none;
+}
+
+ /* Turn row layout */
+#turnBar {
+  width: 620px;              /* EXACT same as board width */
+  margin-top: 0px;
+  margin-left: 80px;
+  margin-bottom: 0px;
+  display: flex;
+  flex-direction: row;       /* force horizontal */
+  align-items: center;
+  justify-content: space-between;
+}
+
+#leftControls {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;       /* center items under the board */
+  justify-content: center;
+  gap: 10px;
+  flex:1
+}
+
+#turnSelector {
+  display: flex;
+  gap: 10px;
+  margin-top: 0;
+}
+
+#turnSelector.hidden {
+  display: none;
+}
+
+#turnSelector button {
+  min-width: 100px;
+  padding: 6px 2px 6px 2px;
+  flex: 1;
+  border: none;
+  background: #333;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: Arial;
+  font-size:15px;
+}
+
+#turnSelector button:hover {
+  background: #555;
+}
+
+#turnSelector button.active {
+  background: #007bff;
+  color: white;
+}
+
+#modeIndicator:empty {
+  display: none;
+}
+
+#turnIndicator {
+  display: flex;
+  align-items: center;       /* center items under the board */
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  height: 36px; /* match icon height */
+}
+
+/* Right side counters */
+#pieceCounters {
+  display: flex;
+}
+
+/* Individual counter */
+.pieceCounter {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.pieceIcon {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Number overlay */
+.pieceCount {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+#blackCounter .pieceCount {
+  color: white;
+}
+
+#whiteCounter .pieceCount {
+  color: black;
+}
+
+#playCommentBox {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 8px;
+  width: 700px;
+  min-height: 50px;
+  max-height: 80px;
+  overflow-y: auto;
+  background: #f4f8ff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: pre-wrap; /* preserves line breaks */
+}

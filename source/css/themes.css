@@ -1,0 +1,146 @@
+/* =============================
+   BOARD COLOR THEMES
+   Base colors remain the default theme
+============================= */
+
+/* Default = your existing colors (no extra class needed) */
+
+/* Forest */
+#board.theme-forest .dark {
+  background: #6f8f72;
+}
+#board.theme-forest .light {
+  background: #dbe8d0;
+}
+#board.theme-forest .corner,
+#board.theme-forest .throne {
+  background: #9db68f;
+  border-color: rgba(35, 55, 35, 0.45);
+}
+
+/* Slate */
+#board.theme-slate .dark {
+  background: #7c8798;
+}
+#board.theme-slate .light {
+  background: #dfe5ee;
+}
+#board.theme-slate .corner,
+#board.theme-slate .throne {
+  background: #aab4c3;
+  border-color: rgba(25, 35, 50, 0.45);
+}
+
+/* Walnut */
+#board.theme-walnut .dark {
+  background: #8a6246;
+}
+#board.theme-walnut .light {
+  background: #e7d4bf;
+}
+#board.theme-walnut .corner,
+#board.theme-walnut .throne {
+  background: #b99167;
+  border-color: rgba(50, 30, 15, 0.45);
+}
+
+/* Midnight */
+#board.theme-midnight .dark {
+  background: #3e4f69;
+}
+#board.theme-midnight .light {
+  background: #cfd8e6;
+}
+#board.theme-midnight .corner,
+#board.theme-midnight .throne {
+  background: #6f87a8;
+  border-color: rgba(10, 20, 40, 0.55);
+}
+
+/* =============================
+   EDIT MODE / FADED THEMES
+============================= */
+
+/* Default (classic) */
+#board.edit-mode.theme-default .dark {
+  background: #d8c1a1;
+}
+#board.edit-mode.theme-default .light {
+  background: #f1e6d0;
+}
+#board.edit-mode.theme-default .corner,
+#board.edit-mode.theme-default .throne {
+  background: #e2c88f;
+}
+
+/* Forest */
+#board.edit-mode.theme-forest .dark {
+  background: #a4b29f;
+}
+#board.edit-mode.theme-forest .light {
+  background: #d4dfc7;
+}
+#board.edit-mode.theme-forest .corner,
+#board.edit-mode.theme-forest .throne {
+  background: #b4c2a5;
+  border-color: rgba(35, 55, 35, 0.25);
+}
+
+/* Slate */
+#board.edit-mode.theme-slate .dark {
+  background: #9aa2b0;
+}
+#board.edit-mode.theme-slate .light {
+  background: #d0d5df;
+}
+#board.edit-mode.theme-slate .corner,
+#board.edit-mode.theme-slate .throne {
+  background: #b4bcc9;
+  border-color: rgba(25, 35, 50, 0.25);
+}
+
+/* Walnut */
+#board.edit-mode.theme-walnut .dark {
+  background: #a0846e;
+}
+#board.edit-mode.theme-walnut .light {
+  background: #e2d6c3;
+}
+#board.edit-mode.theme-walnut .corner,
+#board.edit-mode.theme-walnut .throne {
+  background: #c0a585;
+  border-color: rgba(50, 30, 15, 0.25);
+}
+
+/* Midnight */
+#board.edit-mode.theme-midnight .dark {
+  background: #5a6a7d;
+}
+#board.edit-mode.theme-midnight .light {
+  background: #d0d6e0;
+}
+#board.edit-mode.theme-midnight .corner,
+#board.edit-mode.theme-midnight .throne {
+  background: #8593a7;
+  border-color: rgba(10, 20, 40, 0.35);
+}
+
+/* Forest */
+body.theme-forest {
+  background: #7e9f80;
+}
+
+/* Slate */
+body.theme-slate {
+  background: #8f99a8;
+}
+
+/* Walnut */
+body.theme-walnut {
+  background: #9b7355;
+}
+
+/* Midnight */
+body.theme-midnight {
+  background: #2e3b52;
+}

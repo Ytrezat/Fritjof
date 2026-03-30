@@ -1,0 +1,40 @@
+#rightPanel {
+  display: flex;
+  flex-direction: column;
+}
+
+#variationTree {
+  position: relative;
+  display: grid;
+  grid-auto-rows: 26px;
+  gap: 6px 28px;
+  max-height: 80vh;
+  overflow: auto;
+  border: 2px solid #222;
+  padding: 10px;
+  background: #fff;
+  font-family: monospace;
+  font-size: 14px;
+  min-width: 400px;
+}
+
+#variationTree.hidden {
+  display: none;
+}
+
+#variationNote {
+  margin-top: 4px;
+  font-size: 10px;
+  color: #555;           /* subtle gray */
+  font-style: italic;    /* optional for emphasis */
+  text-align: right;
+  font-family: Arial;
+}
+
+#variationNote.hidden {
+  display: none;
+}
+
+#commentBox.hidden {
+  display: none;
+}
