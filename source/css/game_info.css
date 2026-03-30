@@ -1,4 +1,4 @@
- #boardTitle {
+#boardTitle {
   text-align: center;
   margin: 0 0 10px 0;
 }
@@ -24,12 +24,12 @@
 
  /* Turn row layout */
 #turnBar {
-  width: 620px;              /* EXACT same as board width */
+  width: 620px;              /* exact same as board width */
   margin-top: 0px;
   margin-left: 80px;
   margin-bottom: 0px;
   display: flex;
-  flex-direction: row;       /* force horizontal */
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }

@@ -13,12 +13,12 @@
   <link rel="stylesheet" href="source/css/game_info.css" />
   <link rel="stylesheet" href="source/css/variation_tree.css" />
 </head>
+
 <body>
 
   <div id="mainLayout">
 
     <div id="boardToolbar">
-      <!-- Shared toolbar row (always visible) -->
       <div id="toolbarTopRow">
         <button onclick="setAnalysisName()">File name</button>
         <div class="themeMenuWrapper">
@@ -39,7 +39,6 @@
         </div>
       </div>
 
-      <!-- Mode-specific controls -->
       <div id="playModeButtons">
         <button onclick="exportAnalysis()">Export</button>
         <button onclick="takeBoardScreenshot()">Screenshot</button>
@@ -123,6 +122,7 @@
       </div>
     </div>
   </div>
+
   <div id="leftContextMenu" class="context-menu hidden"></div>
   <div id="treeContextMenu" class="context-menu hidden"></div>
 

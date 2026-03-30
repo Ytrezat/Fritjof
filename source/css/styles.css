@@ -17,23 +17,22 @@ body {
   background: #b8956a;
 }
 
-/* LEFT SIDE (BOARD) */
+/* LEFT SIDE (BOARD AND LEFT MENU) */
 #leftPanel {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-#leftPanel, #rightPanel {
-  background: rgba(253, 250, 245, 0.92);
-  backdrop-filter: blur(2px);
-}
-
-
-
-/* Card-like panels */
-#leftPanel, #rightPanel {
   background: #fdfaf5;
+  backdrop-filter: blur(2px);
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* RIGHT SIDE (VARIATION TREE) */
+#rightPanel {
+  background: #fdfaf5;
+  backdrop-filter: blur(2px);
   padding: 12px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
@@ -51,6 +50,8 @@ button {
 button:hover {
   background: #555;
 }
+
+/* CONTEXT MENU (e.g. right-click) */
 
 .context-menu {
   position: absolute;

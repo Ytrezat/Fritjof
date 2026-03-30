@@ -3,9 +3,35 @@
   display: grid;
   grid-template-columns: repeat(11, 64px);
   grid-template-rows: repeat(11, 64px);
+  grid-column: 2;
+  grid-row: 2;
   border: 6px solid #3a2a1a;
   border-radius: 6px;
   overflow: hidden;
+}
+
+/* Bigger pieces */
+.square img {
+  width: 52px;
+  height: 52px;
+}
+
+.square {
+  position: relative;
+  z-index: 1;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  cursor: pointer;
+}
+
+.corner, .throne {
+  border: 3px solid rgba(0, 0, 0, 0.5); /* semi-transparent black */
+  box-sizing: border-box; /* ensures border doesn’t increase square size */
+  background: #d8b46c;
 }
 
 /* =============================
@@ -16,15 +42,9 @@
   display: grid;
   grid-template-columns: 24px auto 24px;
   grid-template-rows: 24px auto 24px;
-  gap: 0;
+  gap: 1;
   align-items: center;
   justify-items: center;
-}
-
-/* Put the existing board in the center cell */
-#board {
-  grid-column: 2;
-  grid-row: 2;
 }
 
 /* Empty corner cells */
@@ -99,21 +119,9 @@
   color: transparent;
 }
 
-.square {
-  width: 64px;
-  height: 64px;
-  font-size: 34px;
-  position: relative;
-  z-index: 1;
-}
-
-/* Annotation square highlight */
-.annotated-square {
-  outline: 4px solid #2f80ff;
-  outline-offset: -4px;
-  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.45);
-}
-
+/* =============================
+   BOARD ANNOTATIONS
+============================= */
 /* SVG overlay for arrows */
 #annotationOverlay {
   position: absolute;
@@ -125,35 +133,11 @@
   overflow: visible;
 }
 
-/* Bigger pieces */
-.square img {
-  width: 52px;
-  height: 52px;
-}
-
-.square {
-  width: 64px;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 34px;
-  cursor: pointer;
-}
-
-/* restore board colors */
-.dark {
-  background: #bb8866;
-}
-
-.light {
-  background: #eeddbb;
-}
-
-.corner, .throne {
-  border: 3px solid rgba(0, 0, 0, 0.5); /* semi-transparent black */
-  box-sizing: border-box; /* ensures border doesn’t increase square size */
-  background: #d8b46c;
+/* Annotation square highlight */
+.annotated-square {
+  outline: 4px solid #2f80ff;
+  outline-offset: -4px;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.45);
 }
 
 /* selection highlight */
@@ -162,23 +146,6 @@
   outline-offset: -2px;
   border-radius: 2px;
   z-index:4;
-}
-
-/* Pale board for edit mode */
-.edit-mode .dark {
-  background: #d8c1a1;  /* pale brown */
-}
-
-.edit-mode .light {
-  background: #f1e6d0;  /* pale cream */
-}
-
-.edit-mode .corner {
-  background: #e2c88f;  /* pale gold */
-}
-
-.edit-mode .throne {
-  background: #e0c58a;  /* slightly darker pale */
 }
 
 /* Subtle centered neon glow */

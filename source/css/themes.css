@@ -1,97 +1,98 @@
 /* =============================
    BOARD COLOR THEMES
-   Base colors remain the default theme
 ============================= */
 
-/* Default = your existing colors (no extra class needed) */
-
-/* Forest */
-#board.theme-forest .dark {
-  background: #6f8f72;
-}
-#board.theme-forest .light {
-  background: #dbe8d0;
-}
-#board.theme-forest .corner,
-#board.theme-forest .throne {
-  background: #9db68f;
-  border-color: rgba(35, 55, 35, 0.45);
+/* =============================
+   CLASSIC (DEFAULT)
+============================= */
+.square {
+  border: 2px solid rgba(170, 136, 110, 0.8);
+  box-sizing: border-box;
+  background: #eeddbb;
 }
 
-/* Slate */
-#board.theme-slate .dark {
-  background: #7c8798;
-}
-#board.theme-slate .light {
-  background: #dfe5ee;
-}
-#board.theme-slate .corner,
-#board.theme-slate .throne {
-  background: #aab4c3;
-  border-color: rgba(25, 35, 50, 0.45);
+.corner,
+.throne {
+  border: 3px solid rgba(170, 136, 110, 0.8);
+  box-sizing: border-box;
+  background: #d8b46c;
 }
 
-/* Walnut */
-#board.theme-walnut .dark {
-  background: #8a6246;
+/* Edit mode */
+.edit-mode .square {
+  background: #f0e8d0; /* less extreme, still light */
+  border-color: rgba(170, 136, 110, 0.4);
 }
-#board.theme-walnut .light {
-  background: #e7d4bf;
-}
-#board.theme-walnut .corner,
-#board.theme-walnut .throne {
-  background: #b99167;
-  border-color: rgba(50, 30, 15, 0.45);
+.edit-mode .corner,
+.edit-mode .throne {
+  background: #e0c8a0;
+  border-color: rgba(170, 136, 110, 0.4);
 }
 
-/* Midnight */
-#board.theme-midnight .dark {
-  background: #3e4f69;
+#board.theme-default .square {
+  border: 2px solid rgba(170, 136, 110, 0.8);
+  box-sizing: border-box;
+  background: #eeddbb;
 }
-#board.theme-midnight .light {
-  background: #cfd8e6;
-}
-#board.theme-midnight .corner,
-#board.theme-midnight .throne {
-  background: #6f87a8;
-  border-color: rgba(10, 20, 40, 0.55);
+
+#board.theme-default .corner,
+#board.theme-default .throne {
+  border: 3px solid rgba(170, 136, 110, 0.8);
+  box-sizing: border-box;
+  background: #d8b46c;
 }
 
 /* =============================
-   EDIT MODE / FADED THEMES
+   FOREST
 ============================= */
-
-/* Default (classic) */
-#board.edit-mode.theme-default .dark {
-  background: #d8c1a1;
-}
-#board.edit-mode.theme-default .light {
-  background: #f1e6d0;
-}
-#board.edit-mode.theme-default .corner,
-#board.edit-mode.theme-default .throne {
-  background: #e2c88f;
+#board.theme-forest .square {
+  border: 2px solid rgba(35, 55, 35, 0.45);
+  box-sizing: border-box;
+  background: #d4e8d0;
 }
 
-/* Forest */
-#board.edit-mode.theme-forest .dark {
-  background: #a4b29f;
+#board.theme-forest .corner,
+#board.theme-forest .throne {
+  border: 3px solid rgba(35, 55, 35, 0.45);
+  box-sizing: border-box;
+  background: #9db68f;
 }
-#board.edit-mode.theme-forest .light {
-  background: #d4dfc7;
+
+/* Edit mode */
+#board.edit-mode.theme-forest .square {
+  background: #c0e0c0;
+  border-color: rgba(35, 55, 35, 0.25);
 }
 #board.edit-mode.theme-forest .corner,
 #board.edit-mode.theme-forest .throne {
-  background: #b4c2a5;
+  background: #a8c2a0;
   border-color: rgba(35, 55, 35, 0.25);
 }
 
-/* Slate */
-#board.edit-mode.theme-slate .dark {
-  background: #9aa2b0;
+body.theme-forest {
+  background: #7e9f80;
 }
-#board.edit-mode.theme-slate .light {
-  background: #d0d5df;
+
+/* =============================
+   SLATE
+============================= */
+#board.theme-slate .square {
+  border: 2px solid rgba(25, 35, 50, 0.45);
+  box-sizing: border-box;
+  background: #d8dde6;
+}
+
+#board.theme-slate .corner,
+#board.theme-slate .throne {
+  border: 3px solid rgba(25, 35, 50, 0.45);
+  box-sizing: border-box;
+  background: #aab4c3;
+}
+
+/* Edit mode */
+#board.edit-mode.theme-slate .square {
+  background: #d0d4de;
+  border-color: rgba(25, 35, 50, 0.25);
 }
 #board.edit-mode.theme-slate .corner,
 #board.edit-mode.theme-slate .throne {
@@ -99,12 +100,30 @@
   border-color: rgba(25, 35, 50, 0.25);
 }
 
-/* Walnut */
-#board.edit-mode.theme-walnut .dark {
-  background: #a0846e;
+body.theme-slate {
+  background: #8f99a8;
 }
-#board.edit-mode.theme-walnut .light {
-  background: #e2d6c3;
+
+/* =============================
+   WALNUT
+============================= */
+#board.theme-walnut .square {
+  border: 2px solid rgba(50, 30, 15, 0.45);
+  box-sizing: border-box;
+  background: #d8c4b0;
+}
+
+#board.theme-walnut .corner,
+#board.theme-walnut .throne {
+  border: 3px solid rgba(50, 30, 15, 0.45);
+  box-sizing: border-box;
+  background: #b99167;
+}
+
+/* Edit mode */
+#board.edit-mode.theme-walnut .square {
+  background: #e8d8c0;
+  border-color: rgba(50, 30, 15, 0.25);
 }
 #board.edit-mode.theme-walnut .corner,
 #board.edit-mode.theme-walnut .throne {
@@ -112,12 +131,30 @@
   border-color: rgba(50, 30, 15, 0.25);
 }
 
-/* Midnight */
-#board.edit-mode.theme-midnight .dark {
-  background: #5a6a7d;
+body.theme-walnut {
+  background: #9b7355;
 }
-#board.edit-mode.theme-midnight .light {
+
+/* =============================
+   MIDNIGHT
+============================= */
+#board.theme-midnight .square {
+  border: 2px solid rgba(10, 20, 40, 0.55);
+  box-sizing: border-box;
+  background: #d6dce6;
+}
+
+#board.theme-midnight .corner,
+#board.theme-midnight .throne {
+  border: 3px solid rgba(10, 20, 40, 0.55);
+  box-sizing: border-box;
+  background: #6f87a8;
+}
+
+/* Edit mode */
+#board.edit-mode.theme-midnight .square {
   background: #d0d6e0;
+  border-color: rgba(10, 20, 40, 0.35);
 }
 #board.edit-mode.theme-midnight .corner,
 #board.edit-mode.theme-midnight .throne {
@@ -125,22 +162,6 @@
   border-color: rgba(10, 20, 40, 0.35);
 }
 
-/* Forest */
-body.theme-forest {
-  background: #7e9f80;
-}
-
-/* Slate */
-body.theme-slate {
-  background: #8f99a8;
-}
-
-/* Walnut */
-body.theme-walnut {
-  background: #9b7355;
-}
-
-/* Midnight */
 body.theme-midnight {
   background: #2e3b52;
 }
