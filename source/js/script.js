@@ -415,6 +415,8 @@ function focusNode(node, autoExpand = false) {
   if (autoExpand && node.children.length > 1) {
     node.keepExpanded = true
   }
+
+  selected=null
   render();
   updateCommentUI();
   renderVariationTree();
@@ -791,9 +793,9 @@ function showContextMenu(x, y, node) {
 
     // COLOR OPTIONS
   if (node.parent) {
-    addColorOption(node,"Brillant", 4);
+    addColorOption(node,"Mark", 2);
     addColorOption(node,"Mistake", 1);
-    addColorOption(node,"Forced", 2);
+    addColorOption(node,"Brillant", 4);
     addColorOption(node,"Winning", 3);
   }
 

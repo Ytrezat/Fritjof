@@ -1,13 +1,18 @@
 /* =============================================================================================================
 ======  HELPERS  ======
 ============================================================================================================= */
-function moveToNotation(move) {
+function moveToNotation(move,captured=false) {
   const letters = "abcdefghijk"
   if (!move) return "Starting board"
   const padRank = (n) => (n < 10 ? n+"\u00A0" : n)  // pad single-digit ranks
   const from = letters[move.from[0]] + padRank(SIZE - move.from[1]);
   const to   = letters[move.to[0]]   + padRank(SIZE - move.to[1]);
-  return `${from} → ${to}`
+  if(!captured){
+    return `${from} → ${to}`
+  }
+  else{
+    return `${from} x ${to}`
+  }
 }
 
 function createPieceCanvas(pieceType) {
@@ -289,12 +294,11 @@ function updatePlayComment(comment) {
 ======  VARIATION TREE  ======
 ============================================================================================================= */
 function getNodeBackground(tagColor, isCurrent, isActive) {
-  if (tagColor === 1) return isCurrent ? "#f5b5b5" : "#f8d0d0";
-  if (tagColor === 2) return isCurrent ? "#b5d4f5" : "#d0e4f8";
-  if (tagColor === 3) return isCurrent ? "#f5e6a5" : "#f8f1d0";
-  if (tagColor === 4) return isCurrent ? "#b5f5c0" : "#d0f8da";
-
-  if (isCurrent) return "#dfefff";
+  if (tagColor === 1) return isCurrent ? "#ff7b7b" : "#ffb3b3"; //red
+  if (tagColor === 2) return isCurrent ? "#4aa3ff" : "#80c8ff"; //blue
+  if (tagColor === 3) return isCurrent ? "#ffd93d" : "#ffe97d"; //yellow
+  if (tagColor === 4) return isCurrent ? "#7be0a0" : "#a8f0c8"; //green
+  if (isCurrent) return "#a6cfff";
   if (isActive) return "#f4f8ff";
 
   return "";
@@ -341,9 +345,9 @@ function drawMoveTag(div,node,currentNode,pos,activePathSet){
         const moveNum = document.createElement("span")
 
         if (isBlackMove) {
-            moveNum.textContent = `${moveNumber}. `
+            moveNum.textContent = moveNumber<10? `${moveNumber}.\u00A0` : `${moveNumber}.`
         } else {
-            moveNum.textContent = `.. `
+            moveNum.textContent = `...`
         }
 
         moveNum.style.marginRight = "4px"
@@ -355,7 +359,7 @@ function drawMoveTag(div,node,currentNode,pos,activePathSet){
 
         const label = document.createElement("span")
         if(node.gameover===0){
-          label.textContent = moveToNotation(node.move)
+          label.textContent = moveToNotation(node.move,node.lastMoveWithCapture === node.moveNumber && node.moveNumber>1)
         }
         else if(node.gameover===2){
           label.textContent = "Draw"
@@ -443,25 +447,16 @@ function drawVariationLines(container, nodeElements, nodePos, divByNode) {
       line.setAttribute("x1", p.x)
       line.setAttribute("y1", p.y + 8)
       line.setAttribute("x2", n.x)
-      line.setAttribute("y2", n.y - 8)
+      line.setAttribute("y2", n.y - 11)
       line.setAttribute("stroke", "#666")
       line.setAttribute("stroke-width", "1.5")
       svg.appendChild(line)
     } else {
       // cleaner L-connector: down a bit, across, then down
-      const elbowY = p.y + 10
-
-      const v1 = document.createElementNS("http://www.w3.org/2000/svg", "line")
-      v1.setAttribute("x1", p.x)
-      v1.setAttribute("y1", p.y + 8)
-      v1.setAttribute("x2", p.x)
-      v1.setAttribute("y2", elbowY)
-      v1.setAttribute("stroke", "#666")
-      v1.setAttribute("stroke-width", "1.5")
-      svg.appendChild(v1)
+      const elbowY = p.y+5
 
       const h = document.createElementNS("http://www.w3.org/2000/svg", "line")
-      h.setAttribute("x1", p.x)
+      h.setAttribute("x1", p.x+50)
       h.setAttribute("y1", elbowY)
       h.setAttribute("x2", n.x)
       h.setAttribute("y2", elbowY)
@@ -473,7 +468,7 @@ function drawVariationLines(container, nodeElements, nodePos, divByNode) {
       v2.setAttribute("x1", n.x)
       v2.setAttribute("y1", elbowY)
       v2.setAttribute("x2", n.x)
-      v2.setAttribute("y2", n.y - 8)
+      v2.setAttribute("y2", n.y - 11)
       v2.setAttribute("stroke", "#666")
       v2.setAttribute("stroke-width", "1.5")
       svg.appendChild(v2)
