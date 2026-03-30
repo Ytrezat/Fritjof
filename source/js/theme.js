@@ -65,7 +65,7 @@ function updateAllThemeMenuLabels() {
   });
 
   document.querySelectorAll(".toggleKingDesignOption").forEach((button) => {
-    button.textContent = `King Design: ${king_design === "Ytreza" ? "Ytreza" : "Standard"}`;
+    button.textContent = `Pieces: ${king_design === "Ytreza" ? "Ytreza" : "Standard"}`;
   });
 
   document.querySelectorAll(".boardThemeLabel").forEach((button) => {

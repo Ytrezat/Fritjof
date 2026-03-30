@@ -73,7 +73,21 @@ function drawKingPiece(ctx, cx, cy) {
         drawKingPieceSimple(ctx, cx, cy);
 }
 
-function drawPawnPiece(ctx, cx, cy, color = "black") {
+function drawPawnPieceYtreza(ctx, cx, cy, color = "black") {
+  const r = 21;
+
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  ctx.fillStyle = color === "black" ? "#2a2a2a" : "#edede8";
+  ctx.fill();
+
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = color === "black" ? "#444" : "#bbb";
+  ctx.stroke();
+}
+
+
+function drawPawnPieceFancy(ctx, cx, cy, color = "black") {
   const r = 22;
 
   ctx.beginPath();
@@ -91,4 +105,11 @@ function drawPawnPiece(ctx, cx, cy, color = "black") {
     ? "rgba(255,255,255,0.08)"
     : "rgba(255,255,255,0.45)";
   ctx.fill();
+}
+
+function drawPawnPiece(ctx, cx, cy, color = "black") {
+    if(king_design === "Ytreza")
+        drawPawnPieceYtreza(ctx, cx, cy, color);
+    else
+        drawPawnPieceFancy(ctx, cx, cy, color);
 }
