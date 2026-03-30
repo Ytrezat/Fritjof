@@ -74,7 +74,7 @@ function drawKingPiece(ctx, cx, cy) {
 }
 
 function drawPawnPieceYtreza(ctx, cx, cy, color = "black") {
-  const r = 21;
+  const r = 22;
 
   ctx.beginPath();
   ctx.arc(cx, cy, r, 0, Math.PI * 2);
