@@ -1,4 +1,5 @@
 [
+  { "name": "Encapsulation", "file": "Puzzle_12_Hagbard.json", "level": "0" }
   { "name": "Puzzle 6 (Hagbard)", "file": "Puzzle_6_Hagbard.json", "level": "2" },
   { "name": "Puzzle 7 (Hagbard)", "file": "Puzzle_7_Hagbard.json", "level": "2" },
   { "name": "Puzzle 8 (Hagbard)", "file": "Puzzle_8_Hagbard.json", "level": "1" },
@@ -6,8 +7,8 @@
   { "name": "Puzzle 10 (Hagbard)", "file": "Puzzle_10_Hagbard.json", "level": "1" },
   { "name": "Puzzle 11 (Hagbard)", "file": "Puzzle_11_Hagbard.json", "level": "1" },
   { "name": "Puzzle 13 (Luizz)", "file": "Puzzle_13_Luizz.json", "level": "3" },
-  { "name": "Puzzle 14 (Ytreza)", "file": "Puzzle_14_Ytreza.json", "level": "0" },
-  { "name": "Puzzle 15 (Ytreza)", "file": "Puzzle_15_Ytreza.json", "level": "0" },
-  { "name": "Puzzle 16 (Ytreza)", "file": "Puzzle_16_Ytreza.json", "level": "0" },
-  { "name": "Puzzle 17 (Ytreza)", "file": "Puzzle_17_Ytreza.json", "level": "0" }
+  { "name": "Puzzle 14 (Ytreza)", "file": "Puzzle_14_Ytreza.json", "level": "-1" },
+  { "name": "Puzzle 15 (Ytreza)", "file": "Puzzle_15_Ytreza.json", "level": "-1" },
+  { "name": "Puzzle 16 (Ytreza)", "file": "Puzzle_16_Ytreza.json", "level": "-1" },
+  { "name": "Puzzle 17 (Ytreza)", "file": "Puzzle_17_Ytreza.json", "level": "-1" }
 ]

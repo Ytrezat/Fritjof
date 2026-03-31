@@ -948,14 +948,15 @@ function showPuzzleMenu(puzzles) {
   leftfloatingMenu.innerHTML = "";
   styleContextMenu()
 
-  const groups = { "1": [], "2": [], "3": [], "0": [] };
-  puzzles.forEach(p => (groups[String(p.level || "0")] || groups["0"]).push(p));
+  const groups = { "1": [], "2": [], "3": [], "0": [], "-1": [] };
+  puzzles.forEach(p => (groups[String(p.level || "-1")] || groups["-1"]).push(p));
 
   const sections = [
+    { level: "0", title: "Basics", color: "#80c8ff" },
     { level: "1", title: "Easy", color: "#66d17a" },
     { level: "2", title: "Intermediate", color: "#f0b35a" },
     { level: "3", title: "Hard", color: "#e46b6b" },
-    { level: "0", title: "Unknown", color: "#aaaaaa" }
+    { level: "-1", title: "Unknown", color: "#aaaaaa" }
   ];
 
   sections.forEach(sec => {
