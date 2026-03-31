@@ -1,8 +1,9 @@
 [
-  { "name": "Puzzle 6 (Hagbard)", "file": "Puzzle_6__Hagbard_.json", "level": "0" },
-  { "name": "Puzzle 7 (Hagbard)", "file": "Puzzle_7__Hagbard_.json", "level": "0" },
-  { "name": "Puzzle 8 (Hagbard)", "file": "Puzzle_8__Hagbard_.json", "level": "1" },
-  { "name": "Puzzle 9 (Hagbard)", "file": "Puzzle_9__Hagbard_.json", "level": "1" },
-  { "name": "Puzzle 10 (Hagbard)", "file": "Puzzle_10__Hagbard_.json", "level": "1" },
-  { "name": "Puzzle 13 (Luizz)", "file": "Puzzle_13__Luizz_.json", "level": "3" }
-] 
+  { "name": "Puzzle 6 (Hagbard)", "file": "Puzzle_6_Hagbard.json", "level": "0" },
+  { "name": "Puzzle 7 (Hagbard)", "file": "Puzzle_7_Hagbard.json", "level": "0" },
+  { "name": "Puzzle 8 (Hagbard)", "file": "Puzzle_8_Hagbard.json", "level": "1" },
+  { "name": "Puzzle 9 (Hagbard)", "file": "Puzzle_9_Hagbard.json", "level": "1" },
+  { "name": "Puzzle 10 (Hagbard)", "file": "Puzzle_10_Hagbard.json", "level": "1" },
+  { "name": "Puzzle 11 (Hagbard)", "file": "Puzzle_11_Hagbard.json", "level": "0" },
+  { "name": "Puzzle 13 (Luizz)", "file": "Puzzle_13_Luizz.json", "level": "3" }
+]

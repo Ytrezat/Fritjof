@@ -48,7 +48,7 @@ function createPieceCanvas(pieceType) {
 ============================================================================================================= */
 function updateModeUI(gameMode) {
   document.getElementById("modeIndicator").textContent =
-    gameMode === "edit" ?  "Edit Mode: Add black (left click), white (right click), king (double click), or remove pieces (click on piece to remove). Once done, click 'Start'." : ""
+    gameMode === "edit" ?  "Edit Mode: Add white (left click), black (right click), king (double click), or remove pieces (click on piece to remove). Once done, click 'Start'." : ""
 
   const boardEl = document.getElementById("board");
   const editButtons = document.getElementById("editModeButtons")
