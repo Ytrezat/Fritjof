@@ -5,8 +5,6 @@ const SIZE = 11
 const MAXLENGTH_DIRECTION_REPETITION = 10
 const MAXLENGTH_WITHOUT_CAPTURE = 50
 
-let BLACK_SURROUND = "Full"
-
 let analysisName = "(unnamed)";
 
 /* =============================
