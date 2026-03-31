@@ -81,7 +81,7 @@ function updateAllThemeMenuLabels() {
   });
 
   document.querySelectorAll(".RuleBlackWin").forEach((button) => {
-    button.textContent = `Black win: ${BLACK_SURROUND === "Full" ? "Full" : "Partial"}`;
+    button.textContent = `Black surround: ${BLACK_SURROUND === "Full" ? "Full" : "Partial"}`;
   });
 }
 
