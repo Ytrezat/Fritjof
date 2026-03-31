@@ -664,8 +664,8 @@ function handleEditClick(e){
     if(piece !== KING){
       if(board[x][y]===DEFENDER){currentNode.countPieces[1]-=1;}
       if(board[x][y]===ATTACKER){currentNode.countPieces[0]-=1;}
+      board[x][y] = EMPTY
     }
-    board[x][y] = EMPTY
     return
   }
 
