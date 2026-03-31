@@ -506,11 +506,11 @@ function loadPuzzleList() {
     });
 }
 
-function loadPuzzleFromServer(fileName) {
+function loadPuzzleFromServer(fileName, puzzleName) {
   fetch(`Puzzles/${fileName}`)
     .then(res => res.json())
     .then(data => {
-      analysisName = fileName.replace(/\.json$/i, "").replace(/_/g, " ");
+      analysisName = puzzleName;
       updateAnalysisNameUI();
       updateMetadataUI("");
       loadAnalysisData(data);   // same core

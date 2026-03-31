@@ -966,7 +966,7 @@ function showPuzzleMenu(puzzles) {
 
     items.forEach(puzzle => {
       sectionWrap.appendChild(
-        createMenuButton(puzzle.name, () => loadPuzzleFromServer(puzzle.file))
+        createMenuButton(puzzle.name, () => loadPuzzleFromServer(puzzle.file,puzzle.name))
       );
     });
 
