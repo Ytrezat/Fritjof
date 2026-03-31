@@ -56,7 +56,7 @@ function drawKingPieceSimple(ctx, cx, cy) {
 }
 
 function drawKingPieceYtreza(ctx, cx, cy) {
-    const imgSize = 52;
+    const imgSize = 54;
     ctx.drawImage(
         kingImage,
         cx - imgSize / 2,
@@ -74,7 +74,7 @@ function drawKingPiece(ctx, cx, cy) {
 }
 
 function drawPawnPieceYtreza(ctx, cx, cy, color = "black") {
-  const r = 22;
+  const r = 23;
 
   ctx.beginPath();
   ctx.arc(cx, cy, r, 0, Math.PI * 2);
@@ -82,13 +82,13 @@ function drawPawnPieceYtreza(ctx, cx, cy, color = "black") {
   ctx.fill();
 
   ctx.lineWidth = 2;
-  ctx.strokeStyle = color === "black" ? "#444" : "#bbb";
+  ctx.strokeStyle = color === "black" ? "#444" : "#aaa";
   ctx.stroke();
 }
 
 
 function drawPawnPieceFancy(ctx, cx, cy, color = "black") {
-  const r = 22;
+  const r = 23;
 
   ctx.beginPath();
   ctx.arc(cx, cy, r, 0, Math.PI * 2);
