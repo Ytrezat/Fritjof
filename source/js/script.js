@@ -430,6 +430,14 @@ function onLeftClick(){
     contextMenu.classList.add("hidden");
     leftfloatingMenu.classList.add("hidden");
   });
+
+  // Hide on Escape key
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      contextMenu.classList.add("hidden");
+      leftfloatingMenu.classList.add("hidden");
+    }
+  });
 }
 
 function setAnalysisName() {
