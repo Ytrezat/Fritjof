@@ -17,8 +17,7 @@
   { "name": "Puzzle 11 (Hagbard)", "file": "Puzzle_11_Hagbard.json", "level": "1" },
   { "name": "Puzzle 13 (Luizz)", "file": "Puzzle_13_Luizz.json", "level": "3" },
   { "name": "Puzzle 13-2", "file": "Puzzle_13-2.json", "level": "1" },
-  { "name": "Puzzle 14 (Ytreza)", "file": "Puzzle_14_Ytreza.json", "level": "-1" },
-  { "name": "Puzzle 15 (Ytreza)", "file": "Puzzle_15_Ytreza.json", "level": "-1" },
-  { "name": "Puzzle 16 (Ytreza)", "file": "Puzzle_16_Ytreza.json", "level": "-1" },
-  { "name": "Puzzle 17 (Ytreza)", "file": "Puzzle_17_Ytreza.json", "level": "-1" }
+  { "name": "Puzzle 14 (Ytreza)", "file": "Puzzle_14_Ytreza.json", "level": "2" },
+  { "name": "Puzzle 15 (Ytreza)", "file": "Puzzle_15_Ytreza.json", "level": "2" },
+  { "name": "Puzzle 16 (Ytreza)", "file": "Puzzle_16_Ytreza.json", "level": "-1" }
 ]
