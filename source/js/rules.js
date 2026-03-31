@@ -1,8 +1,5 @@
 //Black surround = Full (closed barricade) or Partial (block corners and no possible fort).
 
-const stored_BLACK_SURROUND = localStorage.getItem("black_surround");
-if (stored_BLACK_SURROUND !== null){ BLACK_SURROUND = stored_BLACK_SURROUND;}
-
 function SetRuleBlackWin() {
   // Toggle between Standard ("") and Ytreza
   BLACK_SURROUND = (BLACK_SURROUND === "Full") ? "Partial" : "Full";

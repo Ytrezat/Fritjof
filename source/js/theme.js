@@ -6,12 +6,16 @@
 let coordinatesVisible = true;
 let boardTheme = "default";
 let king_design = "" // Simple (default), Ytreza
+let BLACK_SURROUND = "Full"
 
 const stored_coordinatesVisible = localStorage.getItem("coordinatesVisible");
 if (stored_coordinatesVisible !== null){ coordinatesVisible = stored_coordinatesVisible === "true";}
 
 const stored_king_design = localStorage.getItem("king_design");
 if (stored_king_design){ king_design = stored_king_design;}
+
+const stored_BLACK_SURROUND = localStorage.getItem("black_surround");
+if (stored_BLACK_SURROUND !== null){ BLACK_SURROUND = stored_BLACK_SURROUND;}
 
 
 function getBoardFrame() {
