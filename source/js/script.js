@@ -131,7 +131,7 @@ function checkEndGame(x,y){ //x,y is the destination of the last piece that move
   }
   else{
     checkInfiniteGame(currentNode.moveNumber,currentNode.lastMoveWithCapture,currentNode.move.to)
-    if(board[x][y]===KING) checkWinforWhite(x,y);
+    if(!isEdge(currentNode.king)) checkWinforWhite(currentNode.king[0],currentNode.king[1]);
     if(board[x][y]===ATTACKER) checkWinforBlack(x,y,currentNode.king);
     if (currentNode.moveHistory.length === MAXLENGTH_DIRECTION_REPETITION){
       checkRepetition(currentNode.moveHistory);

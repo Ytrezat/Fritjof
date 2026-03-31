@@ -1,3 +1,17 @@
+//Black surround = Full (closed barricade) or Partial (block corners and no possible fort).
+
+const stored_BLACK_SURROUND = localStorage.getItem("black_surround");
+if (stored_BLACK_SURROUND !== null){ BLACK_SURROUND = stored_BLACK_SURROUND;}
+
+function SetRuleBlackWin() {
+  // Toggle between Standard ("") and Ytreza
+  BLACK_SURROUND = (BLACK_SURROUND === "Full") ? "Partial" : "Full";
+
+  localStorage.setItem("black_surround", BLACK_SURROUND);
+  updateAllThemeMenuLabels();
+  render();
+}
+
 /* =============================================================================================================
    SQUARE TYPE DETECTION
 ============================================================================================================= */
@@ -287,9 +301,9 @@ function WhiteWin_Corner(x,y) {
 ============================================================================================================= */
 
 function WhiteWin_EdgeFort_type1(x, y) {
-  if (board[x][y] !== KING || !isEdge(x, y)) {
-    return { won: false, squares: [] };
-  }
+//  if (board[x][y] !== KING || !isEdge(x, y)) {
+//    return { won: false, squares: [] };
+//  }
   const cases = [
     // LEFT
     {
@@ -352,9 +366,9 @@ function WhiteWin_EdgeFort_type1(x, y) {
 
 
 function WhiteWin_EdgeFort_type2(x, y) {
-  if (board[x][y] !== KING || !isEdge(x, y)) {
-    return { won: false, squares: [] };
-  }
+//  if (board[x][y] !== KING || !isEdge(x, y)) {
+//   return { won: false, squares: [] };
+//  }
 
   const cases = [
     { cond: x === 0, dx: 1, dy: 0 },
@@ -953,6 +967,10 @@ function BlackWin_NoEscapeNoFortress(kingPos) {
     };
   }
 
+  if(BLACK_SURROUND === "Full"){
+    return { won: false, squares: [] };
+  }
+
   // Phase 3: Fortress potential
   const Wk = countWhiteInRegion(b, K);
   const edges = ["top", "bottom", "left", "right"];
@@ -1052,7 +1070,7 @@ function BlackWin_Repetition(moveHistory) {
 ============================================================================================================= */
 
 function checkWinforWhite(x,y) {
-  // 1️⃣ White corner escape
+  // 1️White corner escape
   const cornerResult = WhiteWin_Corner(x,y);
   if (cornerResult.won) {
     winner = "white";
@@ -1060,7 +1078,7 @@ function checkWinforWhite(x,y) {
     winSquares = cornerResult.squares;
   }
 
-  // 2️⃣ White edge fort
+  // 2️White edge fort
   const edgeFortResult1 = WhiteWin_EdgeFort_type1(x,y);
   if (edgeFortResult1.won) {
     winner = "white";
@@ -1082,7 +1100,7 @@ function checkWinforBlack(x,y,kingPos) {
   winType = "";
   winSquares = [];
 
-  // 1️⃣ Black captures king (tactical immediate win)
+  // 1️Black captures king
   const kingCapturedResult = BlackWin_KingCaptured(x,y,kingPos);
   if (kingCapturedResult.won) {
     winner = "black";
@@ -1090,7 +1108,7 @@ function checkWinforBlack(x,y,kingPos) {
     winSquares = kingCapturedResult.squares;
   }
 
-  // 2️⃣ Black strategic theorem win:
+  // 2️Black strategic theorem win:
   //    no eventual corner escape, no edge fort possible
   const strategicBlackResult = BlackWin_NoEscapeNoFortress(kingPos);
   if (strategicBlackResult.won) {

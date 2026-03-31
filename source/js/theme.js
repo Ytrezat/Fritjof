@@ -75,6 +75,10 @@ function updateAllThemeMenuLabels() {
 
     button.textContent = `Board Colors: ${pretty}`;
   });
+
+  document.querySelectorAll(".RuleBlackWin").forEach((button) => {
+    button.textContent = `Black win: ${BLACK_SURROUND === "Full" ? "Full" : "Partial"}`;
+  });
 }
 
 // Close menus when clicking outside any theme menu wrapper

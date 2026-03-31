@@ -22,7 +22,7 @@
       <div id="toolbarTopRow">
         <button onclick="setAnalysisName()">File name</button>
         <div class="themeMenuWrapper">
-          <button class="themeButton" onclick="toggleThemeMenu(event)">Theme</button>
+          <button class="themeButton" onclick="toggleThemeMenu(event)">Settings</button>
           <div class="themeMenu hidden">
             <button class="toggleCoordinatesOption" type="button" onclick="toggleCoordinates()">
               Coordinates: On
@@ -34,6 +34,10 @@
 
               <button id="boardThemeCycleButton" type="button" onclick="cycleBoardTheme(event)">
                 Board: Classic
+              </button>
+
+              <button class="RuleBlackWin" type="button" onclick="SetRuleBlackWin(event)">
+                Black win: Full surround
               </button>
           </div>
         </div>
