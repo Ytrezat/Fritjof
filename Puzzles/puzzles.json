@@ -1,6 +1,6 @@
 [
-  { "name": "Puzzle 6 (Hagbard)", "file": "Puzzle_6_Hagbard.json", "level": "0" },
-  { "name": "Puzzle 7 (Hagbard)", "file": "Puzzle_7_Hagbard.json", "level": "0" },
+  { "name": "Puzzle 6 (Hagbard)", "file": "Puzzle_6_Hagbard.json", "level": "2" },
+  { "name": "Puzzle 7 (Hagbard)", "file": "Puzzle_7_Hagbard.json", "level": "2" },
   { "name": "Puzzle 8 (Hagbard)", "file": "Puzzle_8_Hagbard.json", "level": "1" },
   { "name": "Puzzle 9 (Hagbard)", "file": "Puzzle_9_Hagbard.json", "level": "1" },
   { "name": "Puzzle 10 (Hagbard)", "file": "Puzzle_10_Hagbard.json", "level": "1" },
