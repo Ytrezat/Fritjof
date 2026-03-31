@@ -211,7 +211,8 @@ function shieldwallCapture(board,x, y) {
       const piece = board[cx][cy];
 
       // Stop if edge line is broken
-      if (piece !== enemy && piece !== KING) break;
+      if (player===ATTACKER && (piece !== DEFENDER || piece !== KING)) break;
+      if (player===DEFENDER && (piece !== ATTACKER)) break;
 
       // Check the inward adjacent square for surrounding piece
       const ix = cx + inward[0];
@@ -245,6 +246,7 @@ function shieldwallCapture(board,x, y) {
 
     // The far end must be closed by a friendly piece or a corner
       const endPiece = board[cx][cy];
+
       const farClosed =
         endPiece === player ||
         (player === DEFENDER && endPiece === KING) ||
