@@ -456,6 +456,7 @@ function setAnalysisName() {
 
   analysisName = name.trim();
   updateAnalysisNameUI();
+  updateMetadataUI("");
 }
 
 function createBoardUI(){
