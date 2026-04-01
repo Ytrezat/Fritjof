@@ -260,7 +260,7 @@ function importSimpleGame(text) {
 }
 
 function pasteSimpleGame() {
-  const text = prompt("Paste game notation:")
+  const text = prompt("Paste game notation, e.g. '1. e1-e3 d6-d3 2. e3-i3 e5-b5'")
   if (!text) return
 
   const name = "(unnamed)"
