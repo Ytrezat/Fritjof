@@ -230,6 +230,23 @@ function importSimpleGame(text) {
         break;
       }
 
+      // ✅ HANDLE RESIGNATION
+      if (part.toLowerCase().includes("timeout")) {
+
+        // currentPlayer is the player to move → that player resigns
+        [xk,yk] = [0,0]
+        makeMove(xk,yk,xk,yk)
+        if (currentPlayer === DEFENDER) {
+          currentNode.gameover = 3; // black timeout → white wins
+        } else {
+          currentNode.gameover = -3; // white timeout → black wins
+        }
+
+        // trigger UI update
+        checkEndGame(0,0)
+        break;
+      }
+
       if (part.toLowerCase().includes("draw")) {
         [xk,yk] = [0,0]
         makeMove(xk,yk,xk,yk)

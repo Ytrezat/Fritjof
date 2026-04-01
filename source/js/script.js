@@ -40,7 +40,7 @@ class MoveNode {
       highlights: [], // e.g. [{ square: "e4" }]
       arrows: [],     // e.g. [{ from: "e2", to: "e4" }]
     }
-    this.gameover = 0 // 0: ongoing, -1: white resigns, 1: black resigns, 2: draw
+    this.gameover = 0 // 0: ongoing, -1: white resigns, 1: black resigns, 2: draw, 3: black timeout, -3: white timeout
   }
 }
 
@@ -128,6 +128,16 @@ function checkEndGame(x,y){ //x,y is the destination of the last piece that move
      winner = "draw";
      winType = ""
      winSquares = [[5,5]]
+  }
+  else if(currentNode.gameover===3){
+     winner = "white";
+     winType = "Black timeout"
+     winSquares = [currentNode.king]
+  }
+  else if(currentNode.gameover===-3){
+     winner = "white";
+     winType = "White timeout"
+     winSquares = [currentNode.king]
   }
   else{
     checkInfiniteGame(currentNode.moveNumber,currentNode.lastMoveWithCapture,currentNode.move.to)

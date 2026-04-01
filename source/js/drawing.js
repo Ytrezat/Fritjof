@@ -358,14 +358,17 @@ function drawMoveTag(div,node,currentNode,pos,activePathSet){
         }
 
         const label = document.createElement("span")
-        if(node.gameover===0){
-          label.textContent = moveToNotation(node.move,node.lastMoveWithCapture === node.moveNumber && node.moveNumber>1)
-        }
-        else if(node.gameover===2){
+        if(node.gameover===2){
           label.textContent = "Draw"
         }
-        else{
+        else if(node.gameover===1 || node.gameover===-1){
           label.textContent = "Resigned"
+        }
+        else if(node.gameover===3 || node.gameover===-3){
+          label.textContent = "Timeout"
+        }
+        else{
+          label.textContent = moveToNotation(node.move,node.lastMoveWithCapture === node.moveNumber && node.moveNumber>1)
         }
         label.style.color = isBlackMove ? "#fff" : "#000";
         label.style.background = isBlackMove ? "#000" : "#f8f8f8";
