@@ -135,7 +135,7 @@ function checkEndGame(x,y){ //x,y is the destination of the last piece that move
      winSquares = [currentNode.king]
   }
   else if(currentNode.gameover===-3){
-     winner = "white";
+     winner = "black";
      winType = "White timeout"
      winSquares = [currentNode.king]
   }

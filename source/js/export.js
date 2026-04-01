@@ -237,9 +237,9 @@ function importSimpleGame(text) {
         [xk,yk] = [0,0]
         makeMove(xk,yk,xk,yk)
         if (currentPlayer === DEFENDER) {
-          currentNode.gameover = -3; // black timeout → white wins
+          currentNode.gameover = 3; // black timeout → white wins
         } else {
-          currentNode.gameover = 3; // white timeout → black wins
+          currentNode.gameover = -3; // white timeout → black wins
         }
 
         // trigger UI update
