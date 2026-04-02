@@ -6,10 +6,12 @@ Fritjof is a review app for Copenhagen hnefatafl games. It includes basic functi
 
 > **Note:** The winning conditions checked in the app are slightly different from the official Copenhagen rules:
 >
-> - White wins when the king reaches a corner, or if he builds one of the two elementary edge forts.  
-> - Black wins when the king is captured, or when White cannot achieve his goals anymore, even if Black stops playing.  
-> - Black wins on direct repetition of two moves.  
-> - Longer repetition cycles, or undecided games (> 50 moves without captures) lead to draws. This allows the existence of some special draw forts with a 3-fold (or more) repetition cycle.
+> - White wins when the king reaches a corner, or if the king is on the edge, protected by one of the two elementary edge forts.
+> - Black wins when the king is captured, or, if "full surround" is set, when White is completely surrounded.
+> - If "partial surround" is set, Black wins as soon as White cannot achieve his goals anymore, even if Black stops playing. 
+> - Black wins on direct repetition of two moves.
+> - Draws are detected when more than 100 moves are played without capture (if "full surround" is set), or 50 moves (if "partial surround" is set).
+> - Long repetition cycles are not detected and will eventually lead to draws after reaching the maximum of moves. This in principle allows for the existence of some special draw forts with a 3-fold (or more) repetition cycle.
 
 ---
 

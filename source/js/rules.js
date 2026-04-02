@@ -3,7 +3,7 @@
 function SetRuleBlackWin() {
   // Toggle between Standard ("") and Ytreza
   BLACK_SURROUND = (BLACK_SURROUND === "Full") ? "Partial" : "Full";
-
+  MAXLENGTH_WITHOUT_CAPTURE = (BLACK_SURROUND === "Full") ? 100 : 50;
   localStorage.setItem("black_surround", BLACK_SURROUND);
   updateAllThemeMenuLabels();
   render();
