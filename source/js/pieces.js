@@ -78,11 +78,11 @@ function drawPawnPieceYtreza(ctx, cx, cy, color = "black") {
 
   ctx.beginPath();
   ctx.arc(cx, cy, r, 0, Math.PI * 2);
-  ctx.fillStyle = color === "black" ? "#2a2a2a" : "#edede8";
+  ctx.fillStyle = color === "black" ? "#1a1a1a" : "#faeeb4";
   ctx.fill();
 
-  ctx.lineWidth = 2;
-  ctx.strokeStyle = color === "black" ? "#444" : "#aaa";
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = color === "black" ? "#000" : "#333";
   ctx.stroke();
 }
 
