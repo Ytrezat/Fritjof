@@ -812,7 +812,7 @@ function showContextMenu(x, y, node) {
 
     // COLOR OPTIONS
   if (node.parent) {
-    addColorOption(node,"Mark", 2);
+    addColorOption(node,"Forced", 2);
     addColorOption(node,"Mistake", 1);
     addColorOption(node,"Brillant", 4);
     addColorOption(node,"Winning", 3);
