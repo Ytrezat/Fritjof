@@ -27,5 +27,6 @@
   { "name": "Puzzle 7 (Ytreza)", "file": "Puzzle_7.json", "level": "1" },
   { "name": "Puzzle 8 (Luu)", "file": "Puzzle_8.json", "level": "1" },
   { "name": "Puzzle 9 (Ytreza)", "file": "Puzzle_9.json", "level": "1" },
-  { "name": "Puzzle 10 (Luu)", "file": "Puzzle_10.json", "level": "1" }
+  { "name": "Puzzle 10 (Luu)", "file": "Puzzle_10.json", "level": "1" },
+  { "name": "Puzzle 11 (Ytreza)", "file": "Puzzle_11.json", "level": "1" }
 ]
